@@ -1,0 +1,19 @@
+.spinner {
+    width: 20px;
+    height: 20px;
+    border-left: 3px solid black;
+    border-right: 3px solid black;
+    border-bottom: 3px solid rgb(201, 201, 201);
+    border-left: 3px solid rgb(201, 201, 201);
+    border-radius: 50%;
+    animation: rotate-me 1s linear infinite
+}
+
+@keyframes rotate-me {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
