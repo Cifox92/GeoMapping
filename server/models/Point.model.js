@@ -3,10 +3,10 @@ const Schema = mongoose.Schema
 
 const pointSchema = new Schema({
     name: {type: String},
-    route:{ type: Schema.Types.ObjectId, ref: 'Route' },
     location: { 
         lat: {type: String}, 
-        lon: {type: String} },
+        lon: {type: String} 
+    },
     rocks: [{
         name: {type: String},
         description: {type: String},
@@ -14,20 +14,19 @@ const pointSchema = new Schema({
         photos: {type: Array},
         directions: {
             dataType: {
-                type: {type: String},
-                enum: ['putas rocas', 'putas rocas 2 el regreso'],
-                default: 'putas rocas'
+                type: String,
+                enum: ['Direction and Dip'],
+                default: 'Direction and Dip'
             },
             data: {
                 type: String
             }
-
         }
     }]
 }, {
     timestamps: true
 })
 
-const Point = mongoose.model("User", pointSchema)
+const Point = mongoose.model("Point", pointSchema)
 
 module.exports = Point
