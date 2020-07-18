@@ -54,22 +54,7 @@ class App extends Component {
 
       <>
 
-        <Navigation setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} handleToast={this.handleToast} />
-
-        <Switch>
-          <Route exact path="/" render={() => <IndexPage />} />
-
-          <Route path="/profile" render={() =>
-            this.state.loggedInUser ? <ProfilePage loggedInUser={this.state.loggedInUser} /> : <Redirect to='/signup' />}
-          />
-
-          <Route exact path="/coasters" render={() => <CoastersList loggedInUser={this.state.loggedInUser} />} />
-          <Route path="/coasters/:coaster_id" render={props => <CoasterDetail {...props} />} />
-          <Route path="/signup" render={props => <SignupForm {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />} />
-          <Route path="/login" render={props => <LoginForm {...props} setTheUser={this.setTheUser} handleToast={this.handleToast} />} />
-        </Switch>
-
-        <Message {...this.state.toast} handleToast={this.handleToast} />
+        
 
       </>
 
