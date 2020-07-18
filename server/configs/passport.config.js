@@ -21,8 +21,6 @@ module.exports = app => {
             .catch(err => next(err))
     })
 
-
-
     app.use(flash())
 
     passport.use(new LocalStrategy({ passReqToCallback: true }, (req, username, password, next) => {
