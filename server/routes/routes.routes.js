@@ -14,10 +14,10 @@ router.get('/getAllRoutes', (req, res, next) => {
 
 router.get('getMyRoutes/:userId', (req, res, next) => {
     const userId = User.findById(req.params._id)
-    const route = Route.find({owner: userId}).populate('points')
+    const route = Route.find({ owner: userId }).populate('points')
 
     Promise.all([userId, route])
-        .then(response => res.json({user: response[0], route: response[1]}))
+        .then(response => res.json({ user: response[0], route: response[1] }))
         .catch(err => next(err))
 })
 
@@ -28,11 +28,10 @@ router.get('getOneRoute/:id', (req, res, next) => {
 })
 
 router.post('createNewRoute/:id', (req, res, next) => {
-    const { name, description} = req.body
+    const { name, description } = req.body
     const owner = req.params._id
 
-    Route
-        .create({ name, description, owner })
+    Route.create({ name, description, owner })
         .then(response => res.json(response))
         .catch(err => next(new Error(err)))
 })
@@ -44,15 +43,21 @@ router.get('editRoute/:id', (req, res, next) => {
 })
 
 router.post('editRoute', (req, res, next) => {
-    const {name, description, points} = req.body
+    const { name, description, points } = req.body
 
-    Route.findOneAndUpdate({name: name}, {name: name, description: description, points: points})
+    Route.findOneAndUpdate({ name: name }, { name: name, description: description, points: points })
         .then(response => res.json(response))
         .catch(err => next(err))
 })
 
-router.post('addPoint', (req, res, next) => {
-    Route.findByIdAndUpdate(req.params.id, {})
+router.post('addPoint/:id', (req, res, next) => {
+    const {routeName, name, location, rocks } = req.body
+    const id = req.params.id
+    Point.create({ name, location, rocks })
+        .then(() => Route.findOneAndUpdate({ name: routeName }, { points: id })
+            .then(response => res.json(response))
+            .catch(err => next(err)))
+
 })
 
 module.exports = router
