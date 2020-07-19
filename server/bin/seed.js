@@ -4,7 +4,7 @@ const Point = require('../models/Point.model')
 const Route = require('../models/Route.model')
 const User = require('../models/User.model')
 
-mongoose.connect('mongodb+srv://Cifox:Cifox1992@geomapcluster.zxf68.mongodb.net/test')
+mongoose.connect(process.env.DB)
 
 Point.collection.drop()
 Route.collection.drop()

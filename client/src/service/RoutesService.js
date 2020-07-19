@@ -8,8 +8,8 @@ export default class RouterService {
         })
     }
 
-    getAllRoutes = () => this.service.get('/getAllCoasters')
+    getAllRoutes = () => this.service.get('/getAllRoutes')
     getOneRoute = id => this.service.get(`/getOneRoute/${id}`)
-    getMyRoutes = userId => this.service.get(`/getOneCoaster/${userId}`)
-    createRoute = coaster => this.service.post(`/newCoaster`, coaster) //Revisar esto...
+    getMyRoutes = userId => this.service.get(`/getMyRoutes/${userId}`)
+    createRoute = route => this.service.post(`/createNewRoute`, route)
 }

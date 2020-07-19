@@ -8,7 +8,6 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-
 class LoginForm extends Component {
     constructor(props) {
         super(props)
@@ -18,7 +17,6 @@ class LoginForm extends Component {
         }
         this.authService = new AuthService()
     }
-
 
     handleInputChange = e => {
         const { name, value } = e.target
@@ -31,42 +29,36 @@ class LoginForm extends Component {
             .login(this.state)
             .then(response => {
                 this.props.setTheUser(response.data)
-                this.props.handleToast(true, 'Sesión inciada')
-                this.props.history.push('/coasters')
+                //this.props.handleToast(true, 'Sesión inciada')
+                this.props.history.push('/')
             })
-            .catch(err => console.log(err.response.data.message))   // Error handling yay!
+            .catch(err => console.log(err.response.data.message))
     }
 
     render() {
         return (
             <Container as="main">
-
                 <Row>
                     <Col md={{ offset: 3, span: 6 }}>
-                        <h3>Inicio de sesión</h3>
+                        <h3>Log In</h3>
 
                         <hr></hr>
 
                         <Form onSubmit={this.handleFormSubmit}>
-
                             <Form.Group>
-                                <Form.Label>Nombre de usuario</Form.Label>
+                                <Form.Label>User Name</Form.Label>
                                 <Form.Control onChange={this.handleInputChange} value={this.state.username} name="username" type="text" />
                             </Form.Group>
 
                             <Form.Group>
-                                <Form.Label>Contraseña</Form.Label>
+                                <Form.Label>Password</Form.Label>
                                 <Form.Control onChange={this.handleInputChange} value={this.state.password} name="password" type="password" />
-                                <Form.Text className="text-muted">Mínimo tres caracteres, mangurrián.</Form.Text>
                             </Form.Group>
 
-                            <Button variant="dark" type="submit">Iniciar sesión</Button>
+                            <Button variant="dark" type="submit">Log In</Button>
                         </Form>
-
                     </Col>
                 </Row>
-
-
             </Container>
         )
     }

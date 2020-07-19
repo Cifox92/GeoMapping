@@ -12,38 +12,34 @@ router.get('/getAllRoutes', (req, res, next) => {
         .catch(err => next(err))
 })
 
-router.get('getMyRoutes/:userId', (req, res, next) => {
-    const userId = User.findById(req.params._id)
-    const route = Route.find({owner: userId}).populate('points')
-
-    Promise.all([userId, route])
-        .then(response => res.json({user: response[0], route: response[1]}))
+router.get('/getMyRoutes/:userId', (req, res, next) => {
+   Route.find({owner: req.params.userId}).populate('points')
+        .then(response => res.json(response))
         .catch(err => next(err))
 })
 
-router.get('getOneRoute/:id', (req, res, next) => {
+router.get('/getOneRoute/:id', (req, res, next) => {
     Route.findById(req.params.id).populate('points')
         .then(response => res.json(response))
         .catch(err => next(err))
 })
 
-router.post('createNewRoute/:id', (req, res, next) => {
-    const { name, description} = req.body
-    const owner = req.params._id
-
+router.post('/createNewRoute', (req, res, next) => {
+    const { name, description, owner, points } = req.body
+    
     Route
-        .create({ name, description, owner })
+        .create({ name, description, owner, points })
         .then(response => res.json(response))
         .catch(err => next(new Error(err)))
 })
 
-router.get('editRoute/:id', (req, res, next) => {
+router.get('/editRoute/:id', (req, res, next) => {
     Route.findById(req.params.id).populate('points')
         .then(response => res.json(response))
         .catch(err => next(err))
 })
 
-router.post('editRoute', (req, res, next) => {
+router.post('/editRoute', (req, res, next) => {
     const {name, description, points} = req.body
 
     Route.findOneAndUpdate({name: name}, {name: name, description: description, points: points})
@@ -51,7 +47,7 @@ router.post('editRoute', (req, res, next) => {
         .catch(err => next(err))
 })
 
-router.post('addPoint', (req, res, next) => {
+router.post('/addPoint', (req, res, next) => {
     Route.findByIdAndUpdate(req.params.id, {})
 })
 

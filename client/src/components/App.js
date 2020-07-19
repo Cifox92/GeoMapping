@@ -9,16 +9,15 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 import Navigation from './ui/Navbar'
 import Message from './ui/CustomToast'
 
-import CoastersList from './coasters/Coaster-list/'
-import CoasterDetail from './coasters/Coaster-detail/'
 import SignupForm from './auth/Signup-form'
 import LoginForm from './auth/Login-form'
 import ProfilePage from './pages/profile'
-import IndexPage from './pages/index'
-
+import HomeLoggedIn from './pages/homeLoggedIn'
+import HomeNotLoggedIn from './pages/homeNotLoggedIn'
+import CreateRoute from './pages/createRoute'
+import MyRoutes from './pages/myRoutes'
 
 class App extends Component {
-
   constructor() {
     super()
     this.state = {
@@ -51,15 +50,20 @@ class App extends Component {
     this.fetchUser()
 
     return (
-
       <>
+        <Navigation setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} />
 
-        
-
+        <Switch>
+          <Route exact path='/' render={() => this.state.loggedInUser ? <HomeLoggedIn /> : <HomeNotLoggedIn />} />
+          <Route path='/login' render={props => <LoginForm {...props} setTheUser={this.setTheUser} />} />
+          <Route path='/signup' render={props => <SignupForm {...props} setTheUser={this.setTheUser} />} />
+          <Route path='/profile' render={() => <ProfilePage loggedInUser={this.state.loggedInUser} />} />
+          <Route path='/createRoute' render={props => <CreateRoute {...props} loggedInUser={this.state.loggedInUser} />} />
+          <Route path='/myRoutes' render={props => <MyRoutes {...props} loggedInUser={this.state.loggedInUser} />} />
+        </Switch>
       </>
-
     )
   }
 }
 
-export default App;
+export default App
