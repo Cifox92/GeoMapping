@@ -42,13 +42,19 @@ router.get('/editRoute/:id', (req, res, next) => {
 router.post('/editRoute', (req, res, next) => {
     const {name, description, points} = req.body
 
-    Route.findOneAndUpdate({name: name}, {name: name, description: description, points: points})
+    Route.findOneAndUpdate({ name: name }, { name: name, description: description, points: points })
         .then(response => res.json(response))
         .catch(err => next(err))
 })
 
-router.post('/addPoint', (req, res, next) => {
-    Route.findByIdAndUpdate(req.params.id, {})
+router.post('addPoint/:id', (req, res, next) => {
+    const {routeName, name, location, rocks } = req.body
+    const id = req.params.id
+    Point.create({ name, location, rocks })
+        .then(() => Route.findOneAndUpdate({ name: routeName }, { points: id })
+        .then(response => res.json(response))
+        .catch(err => next(err)))
+
 })
 
 module.exports = router
