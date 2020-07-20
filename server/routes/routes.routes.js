@@ -40,21 +40,21 @@ router.get('/editRoute/:id', (req, res, next) => {
 })
 
 router.post('/editRoute', (req, res, next) => {
-    const {name, description, points} = req.body
+    const { name, description, points } = req.body
 
     Route.findOneAndUpdate({ name: name }, { name: name, description: description, points: points })
         .then(response => res.json(response))
         .catch(err => next(err))
 })
 
-router.post('addPoint/:id', (req, res, next) => {
-    const {routeName, name, location, rocks } = req.body
-    const id = req.params.id
+router.post('/addPoint', (req, res, next) => {
+    const { routeId, name, location, rocks } = req.body
+    
     Point.create({ name, location, rocks })
-        .then(() => Route.findOneAndUpdate({ name: routeName }, { points: id })
+        .then(response => Route.findByIdAndUpdate(routeId, { $push: { points: response.id }}, {new: true})
         .then(response => res.json(response))
         .catch(err => next(err)))
-
 })
 
+// router.get('/')
 module.exports = router

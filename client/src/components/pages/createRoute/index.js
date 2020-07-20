@@ -20,17 +20,18 @@ class CreateRoute extends Component {
         this.routeService = new RouteService()
     }
 
-    handleInputChange = (e) => {
+    handleInputChange = e => {
         const { name, value } = e.target
         this.setState({ [name]: value })
     }
 
-  handleFormSubmit = (e) => {
+  handleFormSubmit = e => {
     e.preventDefault()
     this.routeService
         .createRoute(this.state)
-        .then((response) => this.props.history.push("/"))
-        //this.props.handleToast(true, 'Registro completado')
+        .then(response => {
+            this.props.history.push(`/routeDetails/${response.data._id}`)
+        })
         .catch((err) => console.log(err.response.data.message))
     }
 
@@ -44,13 +45,13 @@ class CreateRoute extends Component {
                     <hr></hr>
                         <Form onSubmit={this.handleFormSubmit}>
                             <Form.Group>
-                            <Form.Label>Route Name</Form.Label>
-                            <Form.Control onChange={this.handleInputChange} value={this.state.name} name="name" type="text" />
+                                <Form.Label>Route Name</Form.Label>
+                                <Form.Control onChange={this.handleInputChange} value={this.state.name} name="name" type="text" />
                             </Form.Group>
 
                             <Form.Group>
-                            <Form.Label>Description of the Route</Form.Label>
-                            <Form.Control as="textarea" onChange={this.handleInputChange} value={this.state.description} name="description" type="text" />
+                                <Form.Label>Description of the Route</Form.Label>
+                                <Form.Control as="textarea" onChange={this.handleInputChange} value={this.state.description} name="description" type="text" />
                             </Form.Group>
 
                             <Button variant="dark" type="submit">Add a new Route</Button>

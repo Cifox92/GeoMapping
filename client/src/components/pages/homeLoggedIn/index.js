@@ -24,7 +24,7 @@ class AllRoutes extends Component {
         return (
             <>
             <h2>HOLA!</h2>
-                {!this.state.routes ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> : <h3>{this.state.routes.map(route => route.name)}</h3>} 
+                {!this.state.routes ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> : <ul>{this.state.routes.map(route => <li key={route._id}>{route.name}</li>)}</ul>} 
             </>
         )
     }

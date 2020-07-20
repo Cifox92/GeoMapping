@@ -7,22 +7,7 @@ const pointSchema = new Schema({
         lat: {type: String}, 
         lon: {type: String} 
     },
-    rocks: [{
-        name: {type: String},
-        description: {type: String},
-        samplesId: {type: Array},
-        photos: {type: Array},
-        directions: {
-            dataType: {
-                type: String,
-                enum: ['Direction and Dip'],
-                default: 'Direction and Dip'
-            },
-            data: {
-                type: String
-            }
-        }
-    }]
+    rocks: [{type: Schema.Types.ObjectId, ref: 'Rock'}]
 }, {
     timestamps: true
 })
