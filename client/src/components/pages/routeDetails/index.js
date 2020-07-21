@@ -26,7 +26,7 @@ class RouteDetails extends Component {
     updatePointList = () => {
         this.routeService
             .getOneRoute(this.state.routeId)
-            .then(response => this.setState({points: response.data.points}))
+            .then(response => this.setState({ points: response.data.points }))
             .catch(err => console.log(err))
     }
 
