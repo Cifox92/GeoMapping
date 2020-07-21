@@ -3,8 +3,9 @@ const Schema = mongoose.Schema
 
 const rockSchema = new Schema({
     name: {type: String},
+    rockType: {type: String},
     description: {type: String},
-    samplesId: {type: Array},
+    samplesId: {type: String},
     photos: {type: Array},
     directions: {
         dataType: {

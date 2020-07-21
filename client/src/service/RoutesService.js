@@ -13,5 +13,5 @@ export default class RouterService {
     getMyRoutes = userId => this.service.get(`/getMyRoutes/${userId}`)
     createRoute = route => this.service.post(`/createNewRoute`, route)
     addPoint = point => this.service.post('/addPoint', point)
-
+    addRock = rock => this.service.post('/addRock', rock)
 }
