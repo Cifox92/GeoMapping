@@ -4,10 +4,9 @@ import './App.css'
 
 import AuthService from './../service/AuthService'
 
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 
 import Navigation from './ui/Navbar'
-import Message from './ui/CustomToast'
 
 import SignupForm from './auth/Signup-form'
 import LoginForm from './auth/Login-form'
@@ -38,12 +37,6 @@ class App extends Component {
       .isLoggedIn()
       .then(response => this.state.loggedInUser === null && this.setState({ loggedInUser: response.data }))
       .catch(err => console.log({ err }))
-  }
-
-  handleToast = (visible, text = '') => {
-    let toastCopy = { ...this.state.toast }
-    toastCopy = { visible, text }
-    this.setState({ toast: toastCopy })
   }
 
   render() {
