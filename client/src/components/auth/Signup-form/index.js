@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 
 import AuthService from "../../../service/AuthService"
+import FilesService from '../../../service/FilesService'
 
 import Button from "react-bootstrap/Button"
 import Form from "react-bootstrap/Form"
@@ -18,9 +19,21 @@ class SignupForm extends Component {
       description: ""
     }
     this.authService = new AuthService()
+    this.filesService = new FilesService()
+  }
+
+  handleFileUpload = e => {
+    const uploadData = new FormData()
+    uploadData.append("avatar", e.target.files[0])
+
+    this.filesService.handleUpload(uploadData)
+      .then(response => {
+        console.log('Subida de archivo finalizada! La URL de Cloudinray es: ', response.data.secure_url)
+        this.setState({ avatar: response.data.secure_url })
+      })
+      .catch(err => console.log(err))
   }
   
-
   handleInputChange = (e) => {
     const { name, value } = e.target
     this.setState({ [name]: value })
@@ -55,7 +68,7 @@ class SignupForm extends Component {
 
               <Form.Group>
                 <Form.Label>Password</Form.Label>
-                <Form.Control onChange={this.handleInputChange} value={this.state.password}name="password" type="password" />
+                <Form.Control onChange={this.handleInputChange} value={this.state.password} name="password" type="password" />
               </Form.Group>
 
               <Form.Group>
@@ -65,8 +78,8 @@ class SignupForm extends Component {
               </Form.Group>
 
               <Form.Group>
-                <Form.Label>Avatar</Form.Label>
-                <Form.Control onChange={this.handleInputChange} value={this.state.avatar} name="avatar" type="file" />
+                <Form.Label>Avatar (file)</Form.Label>
+                <Form.Control name="avatar" type="file" onChange={this.handleFileUpload} />
               </Form.Group>
 
               <Button variant="dark" type="submit">Sign Up!</Button>
