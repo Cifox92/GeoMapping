@@ -5,7 +5,7 @@ const pointSchema = new Schema({
     name: {type: String},
     location: { 
         lat: {type: String}, 
-        lon: {type: String} 
+        lng: {type: String} 
     },
     rocks: [{type: Schema.Types.ObjectId, ref: 'Rock'}]
 }, {

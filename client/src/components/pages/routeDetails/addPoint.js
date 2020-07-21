@@ -15,7 +15,7 @@ class AddPoint extends Component  {
             name: undefined,
             location: {
                 lat: undefined,
-                lon: undefined
+                lng: undefined
             },
             rocks:[]
         }
@@ -28,7 +28,7 @@ class AddPoint extends Component  {
           this.setState({
             location: {
                 lat: position.coords.latitude,
-                lon: position.coords.longitude
+                lng: position.coords.longitude
             }
           })
         })
@@ -59,9 +59,9 @@ class AddPoint extends Component  {
                         <Form onSubmit={this.handleFormSubmit}>
                             <Form.Group>
                                 <Form.Label>Lat</Form.Label>
-                                <Form.Control onChange={this.handleInputChange} value={this.state.location.lat} name="name" type="text" />
+                                <Form.Control onChange={this.handleInputChange} value={this.state.location.lat} name="lat" type="text" />
                                 <Form.Label>Lon</Form.Label>
-                                <Form.Control onChange={this.handleInputChange} value={this.state.location.lon} name="name" type="text" />
+                                <Form.Control onChange={this.handleInputChange} value={this.state.location.lng} name="lng" type="text" />
                             </Form.Group>
 
                             <Form.Group>
