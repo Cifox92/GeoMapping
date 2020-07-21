@@ -16,7 +16,7 @@ class SignupForm extends Component {
       username: "",
       password: "",
       avatar: "",
-      description: ""
+      aboutMe: ""
     }
     this.authService = new AuthService()
     this.filesService = new FilesService()
@@ -74,7 +74,7 @@ class SignupForm extends Component {
               <Form.Group>
                 <Form.Label>Description</Form.Label>
                 <Form.Text className="text-muted">Tell us a bit about yourself.</Form.Text>
-                <Form.Control as="textarea" onChange={this.handleInputChange} value={this.state.description} name="description" type="text" />
+                <Form.Control as="textarea" onChange={this.handleInputChange} value={this.state.description} name="aboutMe" type="text" />
               </Form.Group>
 
               <Form.Group>
