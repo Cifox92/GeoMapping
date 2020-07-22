@@ -1,20 +1,19 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
-import Map from './map';
-
+import React, { Component } from 'react'
+import { render } from 'react-dom'
+import Map from './map'
 
 const googleMapsApiKey = "AIzaSyDq34sAhjDIRsBySpw92CgvTmo8mW8Mwt8";
 
 const MapComp = props => {
-  const {places} = props;
-
-  const {
+  const places = props.points.map(p => p.location)
+  
+const {
     loadingElement,
     containerElement,
     mapElement,
     defaultCenter,
     defaultZoom
-  } = props;
+  } = props
 
   return (
     <Map
@@ -30,10 +29,7 @@ const MapComp = props => {
       defaultCenter={defaultCenter || {lat: 25.798939, lng: -80.291409}}
       defaultZoom={defaultZoom || 11}
     />
-  );
-};
+  )
+}
 
-
-
-
-export default MapComp;
+export default MapComp
