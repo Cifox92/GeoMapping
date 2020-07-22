@@ -1,10 +1,75 @@
-import React from 'react'
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+/* global google */
+import React from "react";
+import {
+  withGoogleMap,
+  GoogleMap,
+  withScriptjs,
+  Marker,
+  DirectionsRenderer
+} from "react-google-maps";
 
-const MyMapComponent = withScriptjs(withGoogleMap((props) =>
-  <GoogleMap defaultZoom={8} defaultCenter={{ lat: -34.397, lng: 150.644 }}>
-    {props.isMarkerShown && <Marker position={{ lat: -34.397, lng: 150.644 }} />}
-  </GoogleMap>
-))
+class MapDirectionsRenderer extends React.Component {
+  state = {
+    directions: null,
+    error: null
+  };
 
-export default MyMapComponent
+  componentDidMount() {
+    const { places, travelMode } = this.props;
+    
+    const waypoints = places.map(p =>({
+        location: {lat: p.latitude, lng:p.longitude},
+        stopover: true
+    }))
+    const origin = waypoints.shift().location;
+    const destination = waypoints.pop().location;
+    
+    
+
+    const directionsService = new google.maps.DirectionsService();
+    directionsService.route(
+      {
+        origin: origin,
+        destination: destination,
+        travelMode: travelMode,
+        waypoints: waypoints
+      },
+      (result, status) => {
+        if (status === google.maps.DirectionsStatus.OK) {
+          this.setState({
+            directions: result
+          });
+        } else {
+          this.setState({ error: result });
+        }
+      }
+    );
+  }
+
+  render() {
+    if (this.state.error) {
+      return <h1>{this.state.error}</h1>;
+    }
+    return (this.state.directions && <DirectionsRenderer directions={this.state.directions} />)
+  }
+}
+
+const Map = withScriptjs(
+  withGoogleMap(props => (
+    <GoogleMap
+      defaultCenter={props.defaultCenter}
+      defaultZoom={props.defaultZoom}
+    >
+      {props.markers.map((marker, index) => {
+        const position = { lat: marker.latitude, lng: marker.longitude };
+        return <Marker key={index} position={position} />;
+      })}
+      <MapDirectionsRenderer
+        places={props.markers}
+        travelMode={google.maps.TravelMode.DRIVING}
+      />
+    </GoogleMap>
+  ))
+);
+
+export default Map;
