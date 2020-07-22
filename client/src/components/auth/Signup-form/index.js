@@ -24,11 +24,11 @@ class SignupForm extends Component {
 
   handleFileUpload = e => {
     const uploadData = new FormData()
-    uploadData.append("avatar", e.target.files[0])
+    uploadData.append('photo', e.target.files[0])
 
     this.filesService.handleUpload(uploadData)
       .then(response => {
-        console.log('Subida de archivo finalizada! La URL de Cloudinray es: ', response.data.secure_url)
+        console.log('Subida de archivo finalizada! La URL de Cloudinary es: ', response.data.secure_url)
         this.setState({ avatar: response.data.secure_url })
       })
       .catch(err => console.log(err))
@@ -41,11 +41,9 @@ class SignupForm extends Component {
 
   handleFormSubmit = (e) => {
     e.preventDefault()
-    this.authService
-      .signup(this.state)
+    this.authService.signup(this.state)
       .then((response) => {
         this.props.setTheUser(response.data);
-        //this.props.handleToast(true, 'Registro completado')
         this.props.history.push("/")
       })
       .catch((err) => console.log(err.response.data.message));
