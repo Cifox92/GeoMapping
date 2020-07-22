@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import RouteService from '../../../service/RoutesService'
+import FilesService from '../../../service/FilesService'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -14,17 +15,30 @@ class AddRockForm extends Component {
             rockType: '',
             description: '',
             samplesId: '',
-            photos: '',
+            photos: [],
             dataType: '',
             data: ''
         }
         this.routeService = new RouteService()
+        this.filesService = new FilesService()
     }
 
     handleInputChange = e => {
         const { name, value } = e.target
         this.setState({ [name]: value })
     }
+
+    handleFileUpload = e => {
+        const uploadData = new FormData()
+        uploadData.append('photo', e.target.files[0])
+    
+        this.filesService.handleUpload(uploadData)
+          .then(response => {
+            console.log('Subida de archivo finalizada! La URL de Cloudinary es: ', response.data.secure_url)
+            this.setState({photos: this.state.photos.concat(response.data.secure_url)})
+          })
+          .catch(err => console.log(err))
+      }
 
     handleFormSubmit = e => {
         e.preventDefault()
@@ -57,12 +71,14 @@ class AddRockForm extends Component {
 
                     <Form.Group>
                         <Form.Label>Samples</Form.Label>
-                        <Form.Control onChange={this.handleInputChange} value={this.state.length} name="samplesId" type="text" />
+                        <Form.Control onChange={this.handleInputChange} value={this.state.samplesId} name="samplesId" type="text" />
                     </Form.Group>
 
                     <Form.Group>
                         <Form.Label>Photos</Form.Label>
-                        <Form.Control onChange={this.handleInputChange} value={this.state.inversions} name="photos" type="file" />
+                        <Form.Control onChange={this.handleFileUpload} name="photos" type="file" />
+                        <p>Added photos: </p>
+                        {this.state.photos.map(photo => <img src={photo} />)}
                     </Form.Group>
 
                     <Form.Group>
