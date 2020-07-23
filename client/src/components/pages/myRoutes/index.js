@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import RouteService from './../../../service/RoutesService'
 import Spinner from 'react-bootstrap/Spinner'
 
+import MapComp from './../../ui/routeMap'
+
 class MyRoutes extends Component {
     constructor (props) {
         super (props)
@@ -25,7 +27,7 @@ class MyRoutes extends Component {
         return (
             <>
             <h2>HOLA!</h2>
-                {!this.state.routes ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> : <ul>{this.state.routes.map(route => <li key={route._id}>{route.name}</li>)}</ul>} 
+            {!this.state.routes ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> : this.state.routes.map(route => <MapComp defaultZoom={15} {...route} /> )}
             </>
         )
     }

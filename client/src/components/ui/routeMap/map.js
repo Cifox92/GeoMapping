@@ -1,5 +1,6 @@
 /* global google*/
 import React from "react";
+
 import {
   withGoogleMap,
   GoogleMap,

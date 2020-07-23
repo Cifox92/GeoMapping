@@ -12,6 +12,7 @@ import HomeNotLoggedIn from './pages/homeNotLoggedIn'
 import CreateRoute from './pages/createRoute'
 import MyRoutes from './pages/myRoutes'
 import RouteCreation from './pages/routeCreation'
+import RouteDetails from './pages/routeDetails'
 
 class App extends Component {
   constructor() {
@@ -50,7 +51,9 @@ class App extends Component {
           <Route path='/profile' render={() => <ProfilePage loggedInUser={this.state.loggedInUser} />} />
           <Route path='/createRoute' render={props => <CreateRoute {...props} loggedInUser={this.state.loggedInUser} />} />
           <Route path='/myRoutes' render={props => <MyRoutes {...props} loggedInUser={this.state.loggedInUser} />} />
-          <Route path='/routeDetails/:id' render={props => <RouteCreation {...props} loggedInUser={this.state.loggedInUser} />} />
+
+          <Route path='/routeCreation/:id' render={props => <RouteCreation {...props} loggedInUser={this.state.loggedInUser} />} />
+          <Route path='/routeDetails/:id' render={props => <RouteDetails {...props} loggedInUser={this.state.loggedInUser} />} />
         </Switch>
       </>
     )

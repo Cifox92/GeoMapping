@@ -24,6 +24,12 @@ router.get('/getOneRoute/:id', (req, res, next) => {
         .catch(err => next(err))
 })
 
+router.get('/getOneRock/:id', (req, res, next) => {
+    Rock.findById(req.params.id)
+        .then(response => res.json(response))
+        .catch(err => next(err))
+})
+
 router.post('/createNewRoute', (req, res, next) => {
     const { name, description, owner, points } = req.body
     
@@ -69,4 +75,5 @@ router.post('/addRock', (req, res, next) => {
         .then(response => res.json(response))
         .catch(err => next(err))
 })
+
 module.exports = router

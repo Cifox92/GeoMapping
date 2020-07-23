@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import RouteService from './../../../service/RoutesService'
 import Spinner from 'react-bootstrap/Spinner'
-import MapComp from './routeMap'
+import MapComp from './../../ui/routeMap'
 import GeneralMap from './generalMap'
 
 class AllRoutes extends Component {

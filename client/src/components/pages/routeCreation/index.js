@@ -6,7 +6,7 @@ import AddRockForm from './AddRockForm'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 
-class RouteDetails extends Component {
+class RouteCreation extends Component {
     constructor (props) {
         super (props)
         this.state = {
@@ -59,4 +59,4 @@ class RouteDetails extends Component {
     }
 }
 
-export default RouteDetails
+export default RouteCreation
