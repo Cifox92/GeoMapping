@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import Spinner from 'react-bootstrap/Spinner'
 import RouteService from '../../../service/RoutesService'
 import AddPoint from './addPoint'
-import AddRockForm from './AddRockForm'
+import AddRock from './addRock'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 
@@ -51,7 +51,7 @@ class RouteCreation extends Component {
 
                 <Modal size="lg" show={this.state.showModal} onHide={() => this.handleModal(false)}>
                     <Modal.Body>
-                        <AddRockForm pointIdClicked={this.state.pointIdClicked} handleRockSubmit={this.handleRockSubmit} />
+                        <AddRock pointIdClicked={this.state.pointIdClicked} handleRockSubmit={this.handleRockSubmit} />
                     </Modal.Body>
                 </Modal>
             </>

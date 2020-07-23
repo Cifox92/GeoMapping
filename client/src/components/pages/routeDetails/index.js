@@ -3,12 +3,13 @@ import RouterService from '../../../service/RoutesService'
 import Spinner from 'react-bootstrap/Spinner'
 
 import MapComp from './../../ui/routeMap'
-import Button from 'react-bootstrap/esm/Button'
 
 class RouteDetails extends Component {
     constructor (props) {
         super (props)
         this.state = {
+            userId: props.loggedInUser._id,
+            ownerId: undefined, 
             routeId: props.match.params.id,
             route: undefined
         }
@@ -19,7 +20,7 @@ class RouteDetails extends Component {
 
     getRouteInfo = () => {
         this.routeService.getOneRoute(this.state.routeId)
-            .then(response => this.setState({route: response.data}))
+            .then(response => this.setState({route: response.data, ownerId: response.data.owner}))
             .catch(err => console.log(err))
     }
 
@@ -30,10 +31,10 @@ class RouteDetails extends Component {
                 <>
                     <MapComp defaultZoom={15} {...this.state.route} />
                     <h2>Points of the route</h2>
-                    {this.state.route.points.map(point => <Button>{point.name}</Button>)}
+                    {this.state.route.points.map(point => <p>{point.name}</p>)}
+                    {this.state.userId === this.state.ownerId ? <p>ES TU RUTA!</p> : null}
                 </>
                 }
-
             </>
         )
     }

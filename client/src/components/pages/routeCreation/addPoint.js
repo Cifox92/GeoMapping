@@ -1,9 +1,8 @@
 import React, {Component} from 'react'
 import RouteService from '../../../service/RoutesService'
-import Button from "react-bootstrap/Button"
-import Form from "react-bootstrap/Form"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
+import PointForm from '../../forms/pointForm'
 
 class AddPoint extends Component  {
     constructor (props) {
@@ -54,21 +53,7 @@ class AddPoint extends Component  {
                     <h3>New Point</h3>
 
                     <hr></hr>
-                        <Form onSubmit={this.handleFormSubmit}>
-                            <Form.Group>
-                                <Form.Label>Lat</Form.Label>
-                                <Form.Control onChange={this.handleInputChange} value={this.state.location.lat} name="lat" type="text" />
-                                <Form.Label>Lon</Form.Label>
-                                <Form.Control onChange={this.handleInputChange} value={this.state.location.lng} name="lng" type="text" />
-                            </Form.Group>
-
-                            <Form.Group>
-                                <Form.Label>Name of the point</Form.Label>
-                                <Form.Control onChange={this.handleInputChange} value={this.state.name} name="name" type="text" />
-                            </Form.Group>
-
-                            <Button variant="dark" type="submit">Add a new Point</Button>
-                        </Form>
+                    <PointForm {...this.state} onSubmit={this.handleFormSubmit} inputChange={this.handleInputChange} />
                     </Col>
                 </Row>
             </>

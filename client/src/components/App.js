@@ -19,10 +19,6 @@ class App extends Component {
     super()
     this.state = {
       loggedInUser: null,
-      toast: {
-        visible: false,
-        text: ''
-      }
     }
     this.AuthService = new AuthService()
   }
@@ -51,7 +47,6 @@ class App extends Component {
           <Route path='/profile' render={() => <ProfilePage loggedInUser={this.state.loggedInUser} />} />
           <Route path='/createRoute' render={props => <CreateRoute {...props} loggedInUser={this.state.loggedInUser} />} />
           <Route path='/myRoutes' render={props => <MyRoutes {...props} loggedInUser={this.state.loggedInUser} />} />
-
           <Route path='/routeCreation/:id' render={props => <RouteCreation {...props} loggedInUser={this.state.loggedInUser} />} />
           <Route path='/routeDetails/:id' render={props => <RouteDetails {...props} loggedInUser={this.state.loggedInUser} />} />
         </Switch>
