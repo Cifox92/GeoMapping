@@ -1,8 +1,6 @@
 import React, { Component } from "react"
-
 import AuthService from "../../../service/AuthService"
 import FilesService from '../../../service/FilesService'
-
 import Button from "react-bootstrap/Button"
 import Form from "react-bootstrap/Form"
 import Container from "react-bootstrap/Container"

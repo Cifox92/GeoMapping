@@ -1,13 +1,15 @@
-import React, { Component } from 'react'
-import { render } from 'react-dom'
+import React from 'react'
 import Map from './map'
 
 const googleMapsApiKey = "AIzaSyDq34sAhjDIRsBySpw92CgvTmo8mW8Mwt8";
 
 const MapComp = props => {
   const places = props.points.map(p => p.location)
-  
-const {
+  let waypoints = places.map(p => ({lat: parseFloat(p.lat), lng: parseFloat(p.lng)}))
+  let centerRoute = Math.ceil(waypoints.length / 2) - 1
+  let lat = waypoints[centerRoute].lat, lng = waypoints[centerRoute].lng
+
+  const {
     loadingElement,
     containerElement,
     mapElement,
@@ -22,11 +24,11 @@ const {
         googleMapsApiKey +
         '&libraries=geometry,drawing,places'
       }
-      markers={places}
+      markers={waypoints}
       loadingElement={loadingElement || <div style={{height: `100%`}}/>}
       containerElement={containerElement || <div style={{height: "80vh"}}/>}
       mapElement={mapElement || <div style={{height: `100%`}}/>}
-      defaultCenter={defaultCenter || {lat: 25.798939, lng: -80.291409}}
+      defaultCenter={defaultCenter || {lat: lat, lng: lng}}
       defaultZoom={defaultZoom || 11}
     />
   )

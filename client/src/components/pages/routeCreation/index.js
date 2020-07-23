@@ -1,11 +1,8 @@
 import React, {Component} from 'react'
-
 import Spinner from 'react-bootstrap/Spinner'
-
 import RouteService from '../../../service/RoutesService'
 import AddPoint from './addPoint'
 import AddRockForm from './AddRockForm'
-
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 

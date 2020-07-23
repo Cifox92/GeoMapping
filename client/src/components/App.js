@@ -1,13 +1,9 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
-
 import AuthService from './../service/AuthService'
-
 import { Switch, Route } from 'react-router-dom'
-
 import Navigation from './ui/Navbar'
-
 import SignupForm from './auth/Signup-form'
 import LoginForm from './auth/Login-form'
 import ProfilePage from './pages/profile'

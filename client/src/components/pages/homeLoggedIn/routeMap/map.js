@@ -5,23 +5,12 @@ import {
   GoogleMap,
   withScriptjs,
   Marker,
-  DirectionsRenderer,
   Polyline
 } from "react-google-maps";
 
 class Map extends React.Component {
   state = {
-    points: undefined
-  }
-
-  componentDidMount = () => this.transformCoord()
-
-  transformCoord = () => {
-    const places = this.props.markers
-    console.log(places)
-    const waypoints = places.map(p => ({lat: parseFloat(p.lat), lng: parseFloat(p.lng)}))
-
-    this.setState({points: waypoints})
+    points: this.props.markers
   }
 
   render() {
@@ -33,15 +22,10 @@ class Map extends React.Component {
               options={{
                 strokeColor: "#ff2527",
                 strokeOpacity: 0.75,
-                strokeWeight: 2,
-                icons: [
-                  {
-                    offset: "0",
-                    repeat: '10px'
-                  }
-                ]
+                strokeWeight: 2
               }}
           />
+          {this.state.points.map(point => <Marker position={{lat: point.lat, lng: point.lng}}/>)}
       </GoogleMap>
     )
   }

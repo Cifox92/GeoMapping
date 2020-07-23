@@ -1,22 +1,34 @@
 import React, {Component} from 'react'
-
 import RouteService from './../../../service/RoutesService'
-
 import Spinner from 'react-bootstrap/Spinner'
-
-import MapComp from './routeMap/MapComp'
-// import GeneralMap from './generalMap'
+import MapComp from './routeMap'
+import GeneralMap from './generalMap'
 
 class AllRoutes extends Component {
     constructor (props) {
         super (props)
         this.state = {
-            routes: undefined
+            routes: undefined,
+            location: undefined
         }
         this.routeService = new RouteService()
     }
 
-    componentDidMount = () => this.updateRouteList()
+    componentDidMount = () => {
+    this.updateRouteList()
+     this.geolocation()
+    }
+
+    geolocation() {
+        navigator.geolocation.getCurrentPosition(position => {
+          this.setState({
+            location: {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            }
+          })
+        })
+      }
 
     updateRouteList = () => {
         this.routeService
@@ -29,15 +41,12 @@ class AllRoutes extends Component {
         return (
             <>
                 <h2>HOLA!</h2>
-                {/* <GeneralMap /> */}
-                
+                {!this.state.routes ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> : <GeneralMap defaultZoom={10} routes = {this.state.routes} centerLoc={this.state.location}/>}
                 <p>Rutas de todos los usuarios...</p>
-                
-                {!this.state.routes ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> : this.state.routes.map(route => <MapComp defaultZoom={7} {...route} /> )}
+                {!this.state.routes ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> : this.state.routes.map(route => <MapComp defaultZoom={15} {...route} /> )}
             </>
         )
     }
 }
-//CREAR TARJETAS PARA CADA RUTA
 
 export default AllRoutes
