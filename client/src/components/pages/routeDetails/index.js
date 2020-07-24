@@ -28,7 +28,7 @@ class RouteDetails extends Component {
                 response.data.points.map(point => {
                     this.routeService.getOnePoint(point._id)
                         .then(response => this.setState({points: this.state.points.concat(response.data).reverse()}))
-                }) 
+                })
             })
             .catch(err => console.log(err))
     }

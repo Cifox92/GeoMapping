@@ -3,7 +3,7 @@ import axios from 'axios'
 export default class RouterService {
     constructor() {
         this.service = axios.create({
-            baseURL: 'http://localhost:5000/api/routes',
+            baseURL: `${process.env.REACT_APP_API_URL}/routes`,
             withCredentials: true
         })
     }
