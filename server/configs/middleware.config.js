@@ -4,7 +4,7 @@ const logger = require('morgan')
 
 const cors = require('cors')
 
-const whitelist = [`${process.env.DOMAIN_REMOTE}`]
+const whitelist = [process.env.DOMAIN_REMOTE]
 const corsOptions = {
     origin: (origin, cb) => {
         const originIsWhitelisted = whitelist.includes(origin)
@@ -12,8 +12,6 @@ const corsOptions = {
     },
     credentials: true
 }
-
-
 
 module.exports = app => {
     app.use(logger('dev'))
