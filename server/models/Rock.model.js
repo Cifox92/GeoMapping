@@ -2,6 +2,7 @@ const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
 const rockSchema = new Schema({
+    pointId: {type: String}, 
     name: {type: String},
     rockType: {type: String},
     description: {type: String},

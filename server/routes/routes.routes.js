@@ -13,7 +13,7 @@ router.get('/getAllRoutes', (req, res, next) => {
 })
 
 router.get('/getMyRoutes/:userId', (req, res, next) => {
-   Route.find({owner: req.params.userId}).populate('points')
+    Route.find({owner: req.params.userId}).populate('points')
         .then(response => res.json(response))
         .catch(err => next(err))
 })
@@ -24,8 +24,8 @@ router.get('/getOneRoute/:id', (req, res, next) => {
         .catch(err => next(err))
 })
 
-router.get('/getOneRock/:id', (req, res, next) => {
-    Rock.findById(req.params.id)
+router.get('/getOnePoint/:id', (req, res, next) => {
+    Point.findById(req.params.id).populate('rocks') 
         .then(response => res.json(response))
         .catch(err => next(err))
 })
@@ -33,19 +33,18 @@ router.get('/getOneRock/:id', (req, res, next) => {
 router.post('/createNewRoute', (req, res, next) => {
     const { name, description, owner, points } = req.body
     
-    Route
-        .create({ name, description, owner, points })
+    Route.create({ name, description, owner, points })
         .then(response => res.json(response))
         .catch(err => next(new Error(err)))
 })
 
-router.get('/editRoute/:id', (req, res, next) => {
-    Route.findById(req.params.id).populate('points')
-        .then(response => res.json(response))
-        .catch(err => next(err))
-})
+// router.put('/editRoute/:id', (req, res, next) => {
+//     Route.findById(req.params.id).populate('points')
+//         .then(response => res.json(response))
+//         .catch(err => next(err))
+// })
 
-router.post('/editRoute', (req, res, next) => {
+router.put('/editRoute', (req, res, next) => {
     const { name, description, points } = req.body
 
     Route.findOneAndUpdate({ name: name }, { name: name, description: description, points: points })
@@ -70,9 +69,27 @@ router.post('/addRock', (req, res, next) => {
         data: data
     }
 
-    Rock.create({ name, rockType, description, samplesId, photos, directions })
+    Rock.create({pointId, name, rockType, description, samplesId, photos, directions })
         .then(response => Point.findByIdAndUpdate(pointId, { $push: { rocks: response.id }}, {new: true}))
         .then(response => res.json(response))
+        .catch(err => next(err))
+})
+
+router.delete('/deleteRock/:id', (req, res, next) => {
+
+    Rock.findOneAndDelete(req.params.id)
+        .catch(err => next(err))
+})
+
+router.delete('/deletePoint/:id', (req, res, next) => {
+
+    Point.findOneAndDelete(req.params.id)
+        .catch(err => next(err))
+})
+
+router.delete('/deleteRoute/:id', (req, res, next) => {
+
+    Route.findOneAndDelete(req.params.id)
         .catch(err => next(err))
 })
 

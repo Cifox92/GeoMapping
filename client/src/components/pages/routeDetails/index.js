@@ -11,16 +11,25 @@ class RouteDetails extends Component {
             userId: props.loggedInUser._id,
             ownerId: undefined, 
             routeId: props.match.params.id,
-            route: undefined
+            route: undefined,
+            points: []
         }
         this.routeService = new RouterService()
     }
 
-    componentDidMount = () => this.getRouteInfo()
+    componentDidMount = () => {
+        this.getRouteInfo()
+    }
 
     getRouteInfo = () => {
         this.routeService.getOneRoute(this.state.routeId)
-            .then(response => this.setState({route: response.data, ownerId: response.data.owner}))
+            .then(response => {
+                this.setState({route: response.data, ownerId: response.data.owner})
+                response.data.points.map(point => {
+                    this.routeService.getOnePoint(point._id)
+                        .then(response => this.setState({points: this.state.points.concat(response.data).reverse()}))
+                }) 
+            })
             .catch(err => console.log(err))
     }
 
@@ -31,7 +40,20 @@ class RouteDetails extends Component {
                 <>
                     <MapComp defaultZoom={15} {...this.state.route} />
                     <h2>Points of the route</h2>
-                    {this.state.route.points.map(point => <p>{point.name}</p>)}
+                    {this.state.points.map(point => 
+                        <>
+                            <h3>{point.name}</h3>
+                            <p>Lat: {point.location.lat}</p>
+                            <p>Lng: {point.location.lng}</p>
+                            {point.rocks.map(rock =>
+                                <>
+                                    <p>Rocks in this point:</p>
+                                    <p>Name: {rock.name}</p>
+                                    <p>Description: {rock.description}</p>
+                                </>
+                            )}
+                        </>
+                    )}
                     {this.state.userId === this.state.ownerId ? <p>ES TU RUTA!</p> : null}
                 </>
                 }
