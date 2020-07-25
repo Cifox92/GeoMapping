@@ -3,13 +3,14 @@ import RouterService from '../../../service/RoutesService'
 import Spinner from 'react-bootstrap/Spinner'
 
 import MapComp from './../../ui/routeMap'
+import { Link } from 'react-router-dom'
 
 class RouteDetails extends Component {
     constructor (props) {
         super (props)
         this.state = {
             userId: props.loggedInUser._id,
-            ownerId: undefined, 
+            ownerId: undefined,
             routeId: props.match.params.id,
             route: undefined,
             points: []
@@ -54,7 +55,7 @@ class RouteDetails extends Component {
                             )}
                         </>
                     )}
-                    {this.state.userId === this.state.ownerId ? <p>ES TU RUTA!</p> : null}
+                    {this.state.userId === this.state.ownerId ? <Link to={`/routeEdit/${this.state.routeId}`}>Edit this route!</Link> : null}
                 </>
                 }
             </>

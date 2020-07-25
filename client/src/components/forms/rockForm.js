@@ -43,7 +43,7 @@ const RockForm = props => {
                 <Form.Control onChange={props.inputChange} value={props.data} name="data" type="text" />
             </Form.Group>
 
-            <Button variant="dark" type="submit">Add rock!</Button>
+            <Button variant="dark" type="submit">Done!</Button>
         </Form>
     )  
 }

@@ -18,7 +18,7 @@ const PointForm = props => {
                 <Form.Control onChange={props.inputChange} value={props.name} name="name" type="text" />
             </Form.Group>
 
-            <Button variant="dark" type="submit">Add a new Point</Button>
+            <Button variant="dark" type="submit">Done!</Button>
         </Form>
     )  
 }

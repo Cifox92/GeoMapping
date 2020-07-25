@@ -16,7 +16,7 @@ const RouteForm = props => {
                 <Form.Control as="textarea" onChange={props.inputChange} value={props.description} name="description" type="text" />
             </Form.Group>
 
-            <Button variant="dark" type="submit">Add a new Route</Button>
+            <Button variant="dark" type="submit">Done!</Button>
         </Form>
     )  
 }
