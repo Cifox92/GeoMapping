@@ -1,3 +1,4 @@
+import React from 'react'
 import { ResponsivePie } from '@nivo/pie'
 // make sure parent container have a defined height when using
 // responsive component, otherwise height will be 0 and
@@ -5,27 +6,60 @@ import { ResponsivePie } from '@nivo/pie'
 // website examples showcase many properties,
 // you'll often use just a few of them.
 
+const data = [
+    {
+      "id": "javascript",
+      "label": "javascript",
+      "value": 143,
+      "color": "hsl(107, 70%, 50%)"
+    },
+    {
+      "id": "make",
+      "label": "make",
+      "value": 573,
+      "color": "hsl(68, 70%, 50%)"
+    },
+    {
+      "id": "rust",
+      "label": "rust",
+      "value": 397,
+      "color": "hsl(312, 70%, 50%)"
+    },
+    {
+      "id": "ruby",
+      "label": "ruby",
+      "value": 230,
+      "color": "hsl(80, 70%, 50%)"
+    },
+    {
+      "id": "go",
+      "label": "go",
+      "value": 170,
+      "color": "hsl(235, 70%, 50%)"
+    }
+  ]
 
-
-const MyResponsivePie = ({ data /* see data tab */ }) => (
+const MyResponsivePie = () => (
     <ResponsivePie
         data={data}
         margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
-        innerRadius={0.5}
-        padAngle={0.7}
-        cornerRadius={3}
-        colors={{ scheme: 'greens' }}
-        borderWidth={1}
-        borderColor={{ from: 'color', modifiers: [ [ 'darker', 0.2 ] ] }}
-        radialLabelsSkipAngle={10}
-        radialLabelsTextXOffset={6}
+        startAngle={-180}
+        endAngle={354}
+        innerRadius={0.15}
+        padAngle={5}
+        cornerRadius={13}
+        colors={{ scheme: 'blues' }}
+        borderWidth={10}
+        borderColor={{ from: 'color', modifiers: [ [ 'darker', '0.5' ] ] }}
+        radialLabelsSkipAngle={14}
+        radialLabelsTextXOffset={16}
         radialLabelsTextColor="#333333"
-        radialLabelsLinkOffset={0}
+        radialLabelsLinkOffset={-11}
         radialLabelsLinkDiagonalLength={16}
         radialLabelsLinkHorizontalLength={24}
         radialLabelsLinkStrokeWidth={1}
         radialLabelsLinkColor={{ from: 'color' }}
-        slicesLabelsSkipAngle={10}
+        slicesLabelsSkipAngle={15}
         slicesLabelsTextColor="#333333"
         animate={true}
         motionStiffness={90}
@@ -122,5 +156,6 @@ const MyResponsivePie = ({ data /* see data tab */ }) => (
         ]}
     />
 )
+
 
 export default MyResponsivePie

@@ -4,6 +4,7 @@ import Spinner from 'react-bootstrap/Spinner'
 
 import MapComp from './../../ui/routeMap'
 import { Link } from 'react-router-dom'
+import PieChart from './../../ui/visualData/pieChart'
 
 class RouteDetails extends Component {
     constructor (props) {
@@ -40,9 +41,13 @@ class RouteDetails extends Component {
                 {!this.state.route ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> :
                 <>
                     <MapComp defaultZoom={15} {...this.state.route} />
+                    <div className ='container' style={{ height: '500px' }} >
+                        <PieChart />
+                        </div>
                     <h2>Points of the route</h2>
                     {this.state.points.map(point => 
                         <>
+                        
                             <h3>{point.name}</h3>
                             <p>Lat: {point.location.lat}</p>
                             <p>Lng: {point.location.lng}</p>
