@@ -39,6 +39,7 @@ class AllRoutes extends Component {
     
     render () {
         return (
+        
             <>
             {!this.state.location ? 
                 <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> :

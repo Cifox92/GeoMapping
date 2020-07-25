@@ -1,7 +1,7 @@
 import React from 'react'
 import Map from './map'
 
-const googleMapsApiKey = "AIzaSyDq34sAhjDIRsBySpw92CgvTmo8mW8Mwt8";
+const googleMapsApiKey = `${process.env.MAPS_KEYS}`
 
 const GeneralMap = props => {
     
