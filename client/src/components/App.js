@@ -13,6 +13,7 @@ import CreateRoute from './pages/createRoute'
 import MyRoutes from './pages/myRoutes'
 import RouteCreation from './pages/routeCreation'
 import RouteDetails from './pages/routeDetails'
+import Edit from './pages/editRoute'
 
 class App extends Component {
   constructor() {
@@ -49,6 +50,7 @@ class App extends Component {
           <Route path='/myRoutes' render={props => <MyRoutes {...props} loggedInUser={this.state.loggedInUser} />} />
           <Route path='/routeCreation/:id' render={props => <RouteCreation {...props} loggedInUser={this.state.loggedInUser} />} />
           <Route path='/routeDetails/:id' render={props => <RouteDetails {...props} loggedInUser={this.state.loggedInUser} />} />
+          <Route path='/routeEdit' render={props => <Edit {...props} loggedInUser={this.state.loggedInUser} />} />
         </Switch>
       </>
     )

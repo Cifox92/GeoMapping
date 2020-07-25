@@ -40,10 +40,19 @@ class AllRoutes extends Component {
     render () {
         return (
             <>
-                <h2>HOLA!</h2>
-                {!this.state.routes ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> : <GeneralMap defaultZoom={10} routes = {this.state.routes} centerLoc={this.state.location}/>}
-                <p>Rutas de todos los usuarios...</p>
-                {!this.state.routes ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> : this.state.routes.map(route => <MapComp defaultZoom={15} {...route} /> )}
+            {!this.state.location ? 
+                <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> :
+                (
+                    <>
+                    <h2>HOLA!</h2>
+                    {!this.state.routes ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> : <GeneralMap defaultZoom={10} routes = {this.state.routes} centerLoc={this.state.location}/>}
+
+                    <p>Rutas de todos los usuarios...</p>
+
+                    {!this.state.routes ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> : this.state.routes.map(route => <MapComp defaultZoom={15} {...route} /> )}
+                    </>
+                )
+            }
             </>
         )
     }
