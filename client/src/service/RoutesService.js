@@ -16,4 +16,6 @@ export default class RouterService {
     addRock = rock => this.service.post('/addRock', rock)
     getOnePoint = pointId => this.service.get(`/getOnePoint/${pointId}`)
     editRoute = route => this.service.put('/editRoute', route)
+    editPoint = point => this.service.put('/editPoint', point)
+    editRock = rock => this.service.put('editRock', rock)
 }

@@ -53,7 +53,6 @@ class AddRockForm extends Component {
                 <hr></hr>
 
                 <RockForm {...this.state} onSubmit={this.handleFormSubmit} fileUpload={this.handleFileUpload} inputChange={this.handleInputChange} />
-
             </>
         )
     }

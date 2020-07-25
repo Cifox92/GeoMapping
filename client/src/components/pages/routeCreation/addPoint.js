@@ -10,10 +10,8 @@ class AddPoint extends Component  {
         this.state = {
             routeId: props.match.params.id,
             name: undefined,
-            location: {
-                lat: undefined,
-                lng: undefined
-            },
+            lat: undefined,
+            lng: undefined,
             rocks:[]
         }
         this.routeService = new RouteService()
@@ -23,10 +21,8 @@ class AddPoint extends Component  {
     geolocation() {
         navigator.geolocation.getCurrentPosition(position => {
           this.setState({
-            location: {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
-            }
           })
         })
       }

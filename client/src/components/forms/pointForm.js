@@ -8,9 +8,9 @@ const PointForm = props => {
         <Form onSubmit={props.onSubmit}>
             <Form.Group>
                 <Form.Label>Lat</Form.Label>
-                <Form.Control onChange={props.inputChange} value={props.location.lat} name="lat" type="text" />
+                <Form.Control onChange={props.inputChange} value={props.lat} name="lat" type="text" />
                 <Form.Label>Lon</Form.Label>
-                <Form.Control onChange={props.inputChange} value={props.location.lng} name="lng" type="text" />
+                <Form.Control onChange={props.inputChange} value={props.lng} name="lng" type="text" />
             </Form.Group>
 
             <Form.Group>

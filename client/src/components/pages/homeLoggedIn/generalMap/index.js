@@ -4,7 +4,6 @@ import Map from './map'
 const googleMapsApiKey = `${process.env.REACT_APP_MAPS_KEYS}`
 
 const GeneralMap = props => {
-    
   const initialPoints = props.routes.map(route => route.points[0].location)
   const waypoints = initialPoints.map(p => ({lat: parseFloat(p.lat), lng: parseFloat(p.lng)}))
   let lat = props.centerLoc.lat, lng = props.centerLoc.lng
