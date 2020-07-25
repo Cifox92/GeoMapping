@@ -45,9 +45,9 @@ router.post('/createNewRoute', (req, res, next) => {
 // })
 
 router.put('/editRoute', (req, res, next) => {
-    const { name, description, points } = req.body
+    const { id, name, description } = req.body
 
-    Route.findOneAndUpdate({ name: name }, { name: name, description: description, points: points })
+    Route.findByIdAndUpdate(id, { name: name, description: description })
         .then(response => res.json(response))
         .catch(err => next(err))
 })
@@ -76,19 +76,16 @@ router.post('/addRock', (req, res, next) => {
 })
 
 router.delete('/deleteRock/:id', (req, res, next) => {
-
     Rock.findOneAndDelete(req.params.id)
         .catch(err => next(err))
 })
 
 router.delete('/deletePoint/:id', (req, res, next) => {
-
     Point.findOneAndDelete(req.params.id)
         .catch(err => next(err))
 })
 
 router.delete('/deleteRoute/:id', (req, res, next) => {
-
     Route.findOneAndDelete(req.params.id)
         .catch(err => next(err))
 })
