@@ -2,7 +2,7 @@ import React from 'react'
 import Map from './map'
 import { Link } from 'react-router-dom';
 
-const googleMapsApiKey = "AIzaSyDq34sAhjDIRsBySpw92CgvTmo8mW8Mwt8";
+const googleMapsApiKey = `${process.env.MAPS_KEYS}`;
 
 const MapComp = props => {
   const places = props.points.map(p => p.location)

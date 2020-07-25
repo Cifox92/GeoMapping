@@ -39,6 +39,7 @@ class AllRoutes extends Component {
     
     render () {
         return (
+        
             <>
                 <h2>HOLA!</h2>
                 {!this.state.routes ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> : <GeneralMap defaultZoom={10} routes = {this.state.routes} centerLoc={this.state.location}/>}
