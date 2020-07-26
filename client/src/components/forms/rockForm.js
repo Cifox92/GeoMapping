@@ -11,16 +11,20 @@ const RockForm = props => {
                 <Form.Control onChange={props.inputChange} value={props.name} name="name" type="text" />
             </Form.Group>
 
-            <Form.Group>
+            <Form.Group controlId="exampleForm.ControlSelect1">
                 <Form.Label>Type of Rock</Form.Label>
-                <Form.Control onChange={props.inputChange} value={props.rockType} name="rockType" type="text" />
+                <Form.Control as='select' onChange={props.inputChange} value={props.rockType} name="rockType" type="text">
+                    <option value='Sedimentary'>Sedimentary</option>
+                    <option value='Igneous'>Igneous</option>
+                    <option value='Metamorphic'>Metamorphic</option>
+                </Form.Control>
             </Form.Group>
 
             <Form.Group>
                 <Form.Label>Description</Form.Label>
                 <Form.Control onChange={props.inputChange} value={props.description} name="description" type="text" />
             </Form.Group>
-
+            
             <Form.Group>
                 <Form.Label>Samples</Form.Label>
                 <Form.Control onChange={props.inputChange} value={props.samplesId} name="samplesId" type="text" />

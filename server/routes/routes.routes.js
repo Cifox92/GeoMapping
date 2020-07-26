@@ -1,4 +1,5 @@
 const express = require('express')
+const mongoose = require("mongoose")
 const router = express.Router()
 
 const Route = require('./../models/Route.model')
@@ -101,18 +102,32 @@ router.post('/addRock', (req, res, next) => {
         .catch(err => next(err))
 })
 
-router.delete('/deleteRock/:id', (req, res, next) => {
-    Rock.findOneAndDelete(req.params.id)
+router.post('/deleteRock', (req, res, next) => {
+
+    Point.findByIdAndDelete(req.body.point)
         .catch(err => next(err))
 })
 
-router.delete('/deletePoint/:id', (req, res, next) => {
-    Point.findOneAndDelete(req.params.id)
+router.post('/deletePoint', (req, res, next) => {
+    const { routeId, point, rocks } = req.body
+
+    let routeUpdate = Route.findByIdAndUpdate(routeId, {$pull: { points: ObjectId(point) }}, {new: true})
+    let pointDeleted = Point.findByIdAndDelete(point)
+    let rocksDeleted = Rock.deleteMany({_id: rocks})
+
+    Promise.all([routeUpdate, rocksDeleted, pointDeleted])
+        .then(response => res.json(response))
         .catch(err => next(err))
 })
 
-router.delete('/deleteRoute/:id', (req, res, next) => {
-    Route.findOneAndDelete(req.params.id)
+router.post('/deleteRoute', (req, res, next) => {
+    const { route, points, rocks } = req.body
+    let routeDelete = Route.findByIdAndDelete(route)
+    let pointsDelete = Point.deleteMany({_id: points})
+    let rocksDelete = Rock.deleteMany({_id: rocks})
+   
+    Promise.all([rocksDelete, pointsDelete, routeDelete])
+        .then(response => res.json(response))
         .catch(err => next(err))
 })
 

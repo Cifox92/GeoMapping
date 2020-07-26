@@ -41,6 +41,41 @@ class Edit extends Component {
         this.getRouteInfo()
     }
 
+    deleteRoute = () => {
+        const pointsId = [], rocksId = []
+
+        this.state.points.map(point => {
+            pointsId.push(point._id)
+            point.rocks.map(rock => rocksId.push(rock._id))
+        })
+
+        const toDelete = {
+            route: this.state.routeId,
+            points: pointsId,
+            rocks: rocksId
+        }
+
+        this.routeService.deleteRoute(toDelete)
+            .then(response => this.props.history.push('/myRoutes'))
+            .catch(err => console.log(err))
+    }
+
+    deletePoint = point => {
+        const rocksId = []
+
+        point.rocks.map(rock => rocksId.push(rock._id))
+
+        const toDelete = {
+            route: this.state.routeId,
+            point: point._id,
+            rocks: rocksId
+        }
+
+        this.routeService.deletePoint(toDelete)
+            .then(response => this.getRouteInfo())
+            .catch(err => console.log(err))
+    }
+
     render () {
         return (
             <>
@@ -50,17 +85,17 @@ class Edit extends Component {
                     (
                         <>
                             <EditRouteInfo {...this.state.route} />
-                            <Button>Delete this route</Button>
+                            <Button onClick={() => this.deleteRoute()}>Delete this route</Button>
 
                             {!this.state.points ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> : <ul>{this.state.points.map(point => 
                                 <li key={point._id}>
                                     <EditPoint point={point} handleFormSubmit={this.handleFormSubmit} />
-                                    <Button>Delete this point</Button>
+                                    <Button onClick={() => this.deletePoint(point)}>Delete this point</Button>
                                     <p>Rocks in this point:</p>
                                     {point.rocks.map(rock => 
                                         <>
                                             <EditRock rock={rock} handleFormSubmit={this.handleFormSubmit} />
-                                            <Button>Delete this rock</Button>
+                                            <Button onClick={() => this.deleteRock()}>Delete this rock</Button>
                                         </>
                                     )}
                                 </li>
@@ -68,7 +103,7 @@ class Edit extends Component {
                             </ul>}
                         </>
                     )
-            }
+                }
             </>
         )
     }
