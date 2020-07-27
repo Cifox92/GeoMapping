@@ -39,7 +39,6 @@ router.post('/createNewRoute', (req, res, next) => {
         .catch(err => next(new Error(err)))
 })
 
-
 router.put('/editRoute', (req, res, next) => {
     const { id, name, description } = req.body
 

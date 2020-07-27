@@ -2,46 +2,44 @@ import React from 'react'
 import { ResponsivePie } from '@nivo/pie'
 
 const MyResponsivePie = props => {
-    console.log(props)
 
     let data = [
         {
             "id": "sedimentary",
-            "label": "sedimentary",
-            "value": props.sedimentaryCount,
+            "label": "Sedimentary",
+            "value": props.countRocks.Sedimentary,
             "color": "hsl(107, 70%, 50%)"
         },
         {
             "id": "igneous",
-            "label": "igneous",
-            "value": 2,
+            "label": "Igneous",
+            "value": props.countRocks.Igneous,
             "color": "hsl(68, 70%, 50%)"
         },
         {
             "id": "metamorphic",
-            "label": "metamorphic",
-            "value": props.metamorphicCount,
+            "label": "Metamorphic",
+            "value": props.countRocks.Metamorphic,
             "color": "hsl(312, 70%, 50%)"
         },
     ]
 
     return (
-
         <ResponsivePie
             data={data}
             margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
             startAngle={-180}
             endAngle={354}
-            innerRadius={0.15}
-            padAngle={5}
-            cornerRadius={13}
-            colors={{ scheme: 'blues' }}
-            borderWidth={10}
+            innerRadius={0.7}
+            padAngle={0}
+            cornerRadius={0}
+            colors={{ scheme: 'nivo' }}
+            borderWidth={1}
             borderColor={{ from: 'color', modifiers: [['darker', '0.5']] }}
             radialLabelsSkipAngle={14}
             radialLabelsTextXOffset={16}
             radialLabelsTextColor="#333333"
-            radialLabelsLinkOffset={-11}
+            radialLabelsLinkOffset={-9}
             radialLabelsLinkDiagonalLength={16}
             radialLabelsLinkHorizontalLength={24}
             radialLabelsLinkStrokeWidth={1}
@@ -51,46 +49,6 @@ const MyResponsivePie = props => {
             animate={true}
             motionStiffness={90}
             motionDamping={15}
-            defs={[
-                {
-                    id: 'dots',
-                    type: 'patternDots',
-                    background: 'inherit',
-                    color: 'rgba(255, 255, 255, 0.3)',
-                    size: 4,
-                    padding: 1,
-                    stagger: true
-                },
-                {
-                    id: 'lines',
-                    type: 'patternLines',
-                    background: 'inherit',
-                    color: 'rgba(255, 255, 255, 0.3)',
-                    rotation: -45,
-                    lineWidth: 6,
-                    spacing: 10
-                }
-            ]}
-            fill={[
-                {
-                    match: {
-                        id: 'sedimentaryCount'
-                    },
-                    id: 'dots'
-                },
-                {
-                    match: {
-                        id: 'igneousCount'
-                    },
-                    id: 'dots'
-                },
-                {
-                    match: {
-                        id: 'metamorphicCount'
-                    },
-                    id: 'lines'
-                }
-            ]}
             legends={[
                 {
                     anchor: 'bottom',

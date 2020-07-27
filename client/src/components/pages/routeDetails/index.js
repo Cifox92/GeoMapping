@@ -15,10 +15,8 @@ class RouteDetails extends Component {
             routeId: props.match.params.id,
             route: undefined,
             points: [],
-            sedimentaryCount: 0,
-            igneousCount: 0,
-            metamorphicCount: 0,
-            count: undefined
+            countRocks: {},
+            isFinished: false
         }
         this.routeService = new RouterService()
 
@@ -39,28 +37,35 @@ class RouteDetails extends Component {
                             this.rockTypeCount(response.data)
                         })
                 })
-                let countRocks = {
-                    sedimentaryCount: this.state.sedimentaryCount,
-                    igneousCount: this.state.igneousCount,
-                    metamorphicCount: this.state.metamorphicCount 
-                }
-        
-                this.setState({count: countRocks})
             })
+            .then(() => setTimeout(() => this.setState({isFinished: true}), 500))
             .catch(err => console.log(err))
     }
 
     rockTypeCount = point => {
         point.rocks.map(rock => {
             if(rock.rockType === 'Sedimentary') {
-              this.state.sedimentaryCount++
+              if(!this.state.countRocks.hasOwnProperty('Sedimentary')) {
+                  this.state.countRocks.Sedimentary = 1
+              } else {
+                this.state.countRocks.Sedimentary += 1
+              }
             }
-            else if(rock.rockType === 'Igneous') {
-                this.state.igneousCount++
+            if(rock.rockType === 'Igneous') {
+                if(!this.state.countRocks.hasOwnProperty('Igneous')) {
+                    this.state.countRocks.Igneous = 1
+                } else {
+                    this.state.countRocks.Igneous += 1
+                }
             }
-            else if(rock.rockType === ' Metamorphic') {
-                this.state.metamorphicCount++
+            if(rock.rockType === 'Metamorphic') {
+                if(!this.state.countRocks.hasOwnProperty('Metamorphic')) {
+                    this.state.countRocks.Metamorphic = 1
+                } else {
+                    this.state.countRocks.Metamorphic += 1
+                }
             }
+            console.log(this.state.countRocks)
         })
     }
 
@@ -71,7 +76,7 @@ class RouteDetails extends Component {
                     <>
                         <MapComp defaultZoom={15} {...this.state.route} />
                         <div className='container' style={{ height: '500px' }} >
-                           {!this.state.count ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> : <PieChart count={this.state.count} />}
+                           {!this.state.isFinished ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> : <PieChart countRocks={this.state.countRocks} />}
                         </div>
                         <h2>Points of the route</h2>
                         {this.state.points.map(point =>
