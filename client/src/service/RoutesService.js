@@ -19,5 +19,6 @@ export default class RouterService {
     editPoint = point => this.service.put('/editPoint', point)
     editRock = rock => this.service.put('/editRock', rock)
     deleteRoute = toDelete => this.service.post('/deleteRoute', toDelete)
-    deletePoint = toDelete => this.service. post('/deletePoint', toDelete)
+    deletePoint = toDelete => this.service.post('/deletePoint', toDelete)
+    deleteRock = toDelete => this.service.post('/deleteRock', toDelete)
 }

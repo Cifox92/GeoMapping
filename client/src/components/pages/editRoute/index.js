@@ -76,6 +76,17 @@ class Edit extends Component {
             .catch(err => console.log(err))
     }
 
+    deleteRock = (rock, point) => {
+        const toDelete = {
+            point: point,
+            rock: rock
+        }
+
+        this.routeService.deleteRock(toDelete)
+            .then(response => this.getRouteInfo())
+            .catch(err => console.log(err))
+    }
+
     render () {
         return (
             <>
@@ -95,7 +106,7 @@ class Edit extends Component {
                                     {point.rocks.map(rock => 
                                         <>
                                             <EditRock rock={rock} handleFormSubmit={this.handleFormSubmit} />
-                                            <Button onClick={() => this.deleteRock()}>Delete this rock</Button>
+                                            <Button onClick={() => this.deleteRock(rock._id, point._id)}>Delete this rock</Button>
                                         </>
                                     )}
                                 </li>

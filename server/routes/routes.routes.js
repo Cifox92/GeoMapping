@@ -103,15 +103,18 @@ router.post('/addRock', (req, res, next) => {
 })
 
 router.post('/deleteRock', (req, res, next) => {
+    const { point, rock } = req.body
 
-    Point.findByIdAndDelete(req.body.point)
+    let pointUpdate = Point.findByIdAndUpdate(point, {$pull: { rocks: mongoose.Types.ObjectId(rock) }}, {new: true})
+    let rockDelete = Rock.findByIdAndDelete(rock)
+
+    Promise.all([pointUpdate, rockDelete])
+        .then(response => res.json(response))
         .catch(err => next(err))
 })
 
 router.post('/deletePoint', (req, res, next) => {
     const { route, point, rocks } = req.body
-
-    console.log(route, point)
 
     let routeUpdate = Route.findByIdAndUpdate(route, {$pull: { points: mongoose.Types.ObjectId(point) }}, {new: true})
     let pointDeleted = Point.findByIdAndDelete(point)
