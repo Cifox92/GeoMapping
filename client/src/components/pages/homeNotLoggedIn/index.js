@@ -10,8 +10,12 @@ const HomeNotLoggedIn = () => {
     return (
         <>
             <section className='title'>
-                <Title>GeoMapping_</Title>
+                <h1><span>GeoMapping_</span></h1>
                 <p>The new social network for Geologists.</p>
+            </section>
+
+            <section>
+                
             </section>
 
         </>

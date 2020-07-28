@@ -13,7 +13,7 @@ import MyRoutes from './pages/myRoutes'
 import RouteCreation from './pages/routeCreation'
 import RouteDetails from './pages/routeDetails'
 import Edit from './pages/editRoute'
-import { Layout, Menu, Drawer, Button } from 'antd';
+import { Layout, Menu, Drawer, Button } from 'antd'
 
 const { Header, Content, Footer } = Layout;
 
@@ -49,13 +49,11 @@ class App extends React.Component {
       .catch(err => console.log({ err }))
   }
 
-
   render() {
 
     this.fetchUser()
 
     return (
-
       <Layout className="layout">
         <Header>
           <div className="logo" />          
@@ -65,7 +63,7 @@ class App extends React.Component {
             <Menu.Item key="3">nav 3</Menu.Item>
           </Menu>
         </Header>
-        <Content style={{ padding: '0 50px' }}>
+        <Content style={{ padding: '0' }}>
           <div className="site-drawer-render-in-current-wrapper">
             <Switch>
               <Route exact path='/' render={() => this.state.loggedInUser ? <HomeLoggedIn /> : <HomeNotLoggedIn />} />
@@ -99,8 +97,3 @@ class App extends React.Component {
 }
 
 export default App
-
-
-
-
-
