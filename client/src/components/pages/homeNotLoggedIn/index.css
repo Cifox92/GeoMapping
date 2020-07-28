@@ -36,7 +36,6 @@ p {
 
 .share {
     background-image: url('https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80');
-
 }
 
 .map {
@@ -58,7 +57,24 @@ p {
     margin: auto;
 }
 
-@media(min-width:800px) {
+.signup {
+    background-color: #F1CC68 ;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    padding: 50px;
+}
+
+.signUpBtn {
+    display: inline-block;
+    color: black;
+    margin: auto;
+    font-size: 3em;
+    border: solid;
+    padding: 20px;
+}
+
+@media(min-width:1100px) {
     h1 span {
         font-size: 4em;
     }

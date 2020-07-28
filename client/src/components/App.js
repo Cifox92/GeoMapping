@@ -38,21 +38,25 @@ class App extends Component {
     this.fetchUser()
 
     return (
-      <>
-        <Navigation setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} />
-        
-        <Switch>
-          <Route exact path='/' render={() => this.state.loggedInUser ? <HomeLoggedIn /> : <HomeNotLoggedIn />} />
-          <Route path='/login' render={props => <LoginForm {...props} setTheUser={this.setTheUser} />} />
-          <Route path='/signup' render={props => <SignupForm {...props} setTheUser={this.setTheUser} />} />
-          <Route path='/profile' render={() => <ProfilePage loggedInUser={this.state.loggedInUser} />} />
-          <Route path='/createRoute' render={props => <CreateRoute {...props} loggedInUser={this.state.loggedInUser} />} />
-          <Route path='/myRoutes' render={props => <MyRoutes {...props} loggedInUser={this.state.loggedInUser} />} />
-          <Route path='/routeCreation/:id' render={props => <RouteCreation {...props} loggedInUser={this.state.loggedInUser} />} />
-          <Route path='/routeDetails/:id' render={props => <RouteDetails {...props} loggedInUser={this.state.loggedInUser} />} />
-          <Route path='/routeEdit/:id' render={props => <Edit {...props} loggedInUser={this.state.loggedInUser} />} />
-        </Switch>
-      </>
+      <div className='contain'>
+        <div className='content'>
+          <Navigation setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} />
+          
+          <Switch>
+            <Route exact path='/' render={() => this.state.loggedInUser ? <HomeLoggedIn /> : <HomeNotLoggedIn />} />
+            <Route path='/login' render={props => <LoginForm {...props} setTheUser={this.setTheUser} />} />
+            <Route path='/signup' render={props => <SignupForm {...props} setTheUser={this.setTheUser} />} />
+            <Route path='/profile' render={() => <ProfilePage loggedInUser={this.state.loggedInUser} />} />
+            <Route path='/createRoute' render={props => <CreateRoute {...props} loggedInUser={this.state.loggedInUser} />} />
+            <Route path='/myRoutes' render={props => <MyRoutes {...props} loggedInUser={this.state.loggedInUser} />} />
+            <Route path='/routeCreation/:id' render={props => <RouteCreation {...props} loggedInUser={this.state.loggedInUser} />} />
+            <Route path='/routeDetails/:id' render={props => <RouteDetails {...props} loggedInUser={this.state.loggedInUser} />} />
+            <Route path='/routeEdit/:id' render={props => <Edit {...props} loggedInUser={this.state.loggedInUser} />} />
+          </Switch>
+        </div>
+
+        <footer className='footer'><small>Copyright ©2020 Ignacio Serrano & David Roel Gómez</small></footer>
+      </div>
     )
   }
 }

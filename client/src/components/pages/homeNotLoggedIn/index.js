@@ -2,6 +2,7 @@ import './index.css'
 
 import React from 'react'
 import { Row, Col } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 const HomeNotLoggedIn = () => {
 
@@ -36,12 +37,15 @@ const HomeNotLoggedIn = () => {
                 </Col>
             </Row>
 
-            <Row>
-                <Col md={12}>
+            <Row className='signup'>
+                <Col md={3}>
                 <section className='sectionText'>
                         <h2><span>Ready?</span></h2>
-                        <p>With Geolocation enabled, you can see other routes and check the information other Geologists have collected.</p>
+                        <p>Join us.</p>
                     </section>
+                </Col>
+                <Col md={3}>
+                        <Link className='signUpBtn' to='/signup'>Sign Up</Link>
                 </Col>
             </Row>
         </>

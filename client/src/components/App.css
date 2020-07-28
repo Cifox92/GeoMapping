@@ -3,6 +3,7 @@
 body {
   font-family: 'Poppins', sans-serif;
   font-weight: 300;
+  min-height: 100vh;
 }
 
 h1, h2, h3 {
@@ -17,4 +18,23 @@ a, a:hover {
 
 img {
   width: 100%;
+}
+
+.contain {
+  position: relative;
+  min-height: 100vh;
+}
+
+.content {
+  padding-bottom: 2rem;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  height: 2rem;
+  width: 100%;
+  background-color: #32322F;
+  color: white;
+  text-align: center;
 }
