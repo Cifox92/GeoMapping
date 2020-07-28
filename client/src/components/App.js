@@ -40,7 +40,7 @@ class App extends Component {
     return (
       <>
         <Navigation setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} />
-
+        
         <Switch>
           <Route exact path='/' render={() => this.state.loggedInUser ? <HomeLoggedIn /> : <HomeNotLoggedIn />} />
           <Route path='/login' render={props => <LoginForm {...props} setTheUser={this.setTheUser} />} />
