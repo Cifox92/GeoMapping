@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
+import Image from 'react-bootstrap/Image'
 import AuthService from './../../../service/AuthService'
 import { Link, NavLink } from 'react-router-dom'
+import './index.css'
 
 class Navigation extends Component {
 
@@ -43,7 +45,8 @@ class Navigation extends Component {
                                         <span onClick={this.logout}>Log Out</span>
                                     </Nav.Link>
                                     <Nav.Link as="span">
-                                        <NavLink to="/profile" activeStyle={{ color: 'white' }}>Hello, {this.props.loggedInUser.username}</NavLink>
+                                        <NavLink to="/profile" activeStyle={{ color: 'white' }}>Hello, {this.props.loggedInUser.username} </NavLink>
+                                        <Image className="navAvatar" src={this.props.loggedInUser.avatar} roundedCircle />
                                     </Nav.Link>
                                 </>
                             ) : (
