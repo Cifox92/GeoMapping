@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
 
+/* Global */
 body {
   font-family: 'Poppins', sans-serif;
   font-weight: 300;
@@ -8,7 +9,15 @@ body {
 
 h1, h2, h3 {
   font-weight: 300;
-  margin: 30px 0
+  margin: 30px 0;
+}
+
+.innerTitle {
+  text-align: center;
+}
+
+.routeCard {
+  margin: 10px 0;
 }
 
 a, a:hover {
@@ -37,4 +46,119 @@ img {
   background-color: #32322F;
   color: white;
   text-align: center;
+}
+
+/* All styles for all the components go here */
+
+/* HomeNotLoggedIn */
+h1 span {
+  color: white;
+  font-weight: 900;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+h2 span {
+  color: white;
+  font-weight: 900;
+  background: rgba(0, 0, 0, 0.7);
+  line-height: 145%;
+}
+
+.p-presentation {
+  color: white;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.subtitle {
+  font-size: 3em;
+  color: white;
+}
+
+.title {
+  background-image: url('https://opengeology.org/textbook/wp-content/uploads/2016/07/Arch4.jpg');
+  background-size: cover;
+  height: 100vh;
+  padding: 100px;
+}
+
+.section {
+  filter: grayscale(100%);
+  height: 100vh;    
+  background-size: cover;
+}
+
+.share {
+  background-image: url('https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80');
+}
+
+.mapImg {
+  background-image: url('./pages/homeNotLoggedIn/Map.jpg');
+}
+
+.sectionText {
+  padding: 100px;
+}
+
+.signup {
+  background-color: #F1CC68 ;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  padding: 50px;
+}
+
+.signUpBtn {
+  display: inline-block;
+  color: black;
+  margin: auto;
+  font-size: 3em;
+  border: solid;
+  padding: 20px;
+}
+
+.neverStop {
+  width: 300px;
+  border-radius: 50%;
+}
+
+@media(min-width:1100px) {
+  h1 span {
+      font-size: 4em;
+  }
+
+  h2 span {
+      font-size: 2.5em;
+  }
+
+  p {
+      font-size: 1.7em;
+  }
+}
+
+/* HomeLoggedIn & MyRoutes */
+.generalMap {
+  height: 100vh;
+}
+
+.allRoutes {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media(min-width:1100px) {
+  .generalMap {
+      margin: 50px;
+      height: 80vh;
+  }
+}
+
+/* RouteDetails */
+.map-data {
+  display: flex;
+  align-items: center;
+}
+
+.detailMap {
+  margin: 50px;
 }

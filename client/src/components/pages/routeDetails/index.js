@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import RouterService from '../../../service/RoutesService'
-import Spinner from 'react-bootstrap/Spinner'
+import { Container, Row, Col, Spinner, Accordion, Card } from 'react-bootstrap'
 
 import MapComp from './../../ui/routeMap'
 import { Link } from 'react-router-dom'
@@ -33,7 +33,7 @@ class RouteDetails extends Component {
                 response.data.points.map(point => {
                     this.routeService.getOnePoint(point._id)
                         .then(response => {
-                            this.setState({ points: this.state.points.concat(response.data).reverse() })
+                            this.setState({ points: this.state.points.concat(response.data) })
                             this.rockTypeCount(response.data)
                         })
                 })
@@ -65,7 +65,6 @@ class RouteDetails extends Component {
                     this.state.countRocks.Metamorphic += 1
                 }
             }
-            console.log(this.state.countRocks)
         })
     }
 
@@ -74,25 +73,49 @@ class RouteDetails extends Component {
             <>
                 {!this.state.route ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> :
                     <>
-                        <MapComp defaultZoom={15} {...this.state.route} />
-                        <div className='container' style={{ height: '500px' }} >
-                           {!this.state.isFinished ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> : <PieChart countRocks={this.state.countRocks} />}
-                        </div>
-                        <h2>Points of the route</h2>
-                        {this.state.points.map(point =>
-                            <>
-                                <h3>{point.name}</h3>
-                                <p>Lat: {point.location.lat}</p>
-                                <p>Lng: {point.location.lng}</p>
-                                {point.rocks.map(rock =>
-                                    <>
-                                        <p>Rocks in this point:</p>
-                                        <p>Name: {rock.name}</p>
-                                        <p>Description: {rock.description}</p>
-                                    </>
-                                )}
-                            </>
-                        )}
+                        <h2 className='innerTitle'>{this.state.route.name}</h2>
+                        <Row className='map-data'>
+                            <Col md={6}>
+                                <div className='detailMap'>
+                                    <MapComp defaultZoom={15} {...this.state.route} />
+                                </div>
+                                
+                            </Col>
+                            <Col md={6}>
+                                <div className='container' style={{ height: '500px' }} >
+                                    {!this.state.isFinished ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> : <PieChart countRocks={this.state.countRocks} />}
+                                </div>
+                            </Col>
+                        </Row>
+                        
+
+                        <h2 className='innerTitle'>Points of the route</h2>
+                        <Container>
+                            <Accordion>
+                            {this.state.points.map((point, idx) =>
+                                <Card>
+                                    <Accordion.Toggle as={Card.Header} eventKey={`${idx}`}>
+                                        <h4>Point: {point.name}</h4>
+                                        <small>Lat: {point.location.lat} | Lng: {point.location.lng}</small>
+                                    </Accordion.Toggle>
+
+                                    <Accordion.Collapse eventKey={`${idx}`}>
+                                        <Card.Body>
+                                            {point.rocks.map((rock, idx) =>
+                                                <div key={idx}>
+                                                    <p>Rocks in this point:</p>
+                                                    <p>Name: {rock.name}</p>
+                                                    <p>Description: {rock.description}</p>
+                                                </div>
+                                            )}
+                                        </Card.Body>
+                                    </Accordion.Collapse>
+                                </Card>
+                            )}
+                            </Accordion>
+                        </Container>
+                       
+                        
                         {this.state.userId === this.state.ownerId ? <Link to={`/routeEdit/${this.state.routeId}`}>Edit this route!</Link> : null}
                     </>
                 }

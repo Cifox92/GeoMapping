@@ -28,10 +28,10 @@ const MapComp = props => {
         }
         markers={waypoints}
         loadingElement={loadingElement || <div style={{height: `100%`}}/>}
-        containerElement={containerElement || <div style={{height: "80px"}}/>}
+        containerElement={containerElement || <div style={{height: "600px"}}/>}
         mapElement={mapElement || <div style={{height: `100%`}}/>}
         defaultCenter={defaultCenter || {lat: lat, lng: lng}}
-        defaultZoom={defaultZoom || 11}
+        defaultZoom={defaultZoom || 20}
       />
       <Link to={`/routeDetails/${props._id}`}>
         

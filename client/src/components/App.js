@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
+
 import AuthService from './../service/AuthService'
 import { Switch, Route } from 'react-router-dom'
 import Navigation from './ui/Navbar'
@@ -54,7 +55,6 @@ class App extends Component {
             <Route path='/routeEdit/:id' render={props => <Edit {...props} loggedInUser={this.state.loggedInUser} />} />
           </Switch>
         </div>
-
         <footer className='footer'><small>Copyright ©2020 Ignacio Serrano & David Roel Gómez</small></footer>
       </div>
     )

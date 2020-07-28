@@ -24,9 +24,9 @@ const GeneralMap = props => {
         '&libraries=geometry,drawing,places'
       }
       markers={waypoints}
-      loadingElement={loadingElement || <div style={{height: `100%`}}/>}
-      containerElement={containerElement || <div style={{height: "80vh"}}/>}
-      mapElement={mapElement || <div style={{height: `100%`}}/>}
+      loadingElement={loadingElement || <div style={{height: `inherit`}}/>}
+      containerElement={containerElement || <div style={{height: "inherit"}}/>}
+      mapElement={mapElement || <div style={{height: 'inherit'}}/>}
       defaultCenter={defaultCenter || {lat: lat, lng: lng}}
       defaultZoom={defaultZoom || 20}
     />
