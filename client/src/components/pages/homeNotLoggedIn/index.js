@@ -1,11 +1,19 @@
+import './index.css'
+
 import React from 'react'
+import { Typography } from 'antd'
+const { Title } = Typography
+
 
 const HomeNotLoggedIn = () => {
 
     return (
         <>
-            <h1>GeoMapping_</h1>
-            <p>NO LOGEADO! Mostrar aquí una presentación para nuevos usuarios.</p>
+            <section className='title'>
+                <Title>GeoMapping_</Title>
+                <p>The new social network for Geologists.</p>
+            </section>
+
         </>
     )
 }
