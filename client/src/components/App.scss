@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
 
-
 /* Global */
 $theme-colors: (
   "primary": #DDA15E,
@@ -61,6 +60,15 @@ img {
   text-align: center;
 }
 
+.editBtn {
+  display: inline-block;
+  color: black;
+  margin:10px;
+  font-size: 1.5em;
+  border: solid;
+  padding: 10px;
+}
+
 /* All styles for all the components go here */
 
 /* HomeNotLoggedIn */
@@ -113,7 +121,7 @@ h2 span {
 }
 
 .signup {
-  background-color: #F1CC68;
+  background-color: #DDA15E;
   display: flex;
   text-align: center;
   align-items: center;
@@ -129,9 +137,20 @@ h2 span {
   padding: 20px;
 }
 
-.neverStop {
+.navLogo {
+  width: 40px;
+  filter: invert(100%) contrast(200%);
+}
+
+.topLogo {
+  width: 250px;
+  padding: 0 30px 30px;
+  filter: invert(100%) contrast(200%);
+}
+
+.bottomLogo {
   width: 300px;
-  border-radius: 50%;
+  padding: 20px;
 }
 
 @media(min-width:1100px) {
@@ -145,6 +164,12 @@ h2 span {
 
   p {
       font-size: 1.7em;
+  }
+}
+
+@media(max-width:1100px) {
+  .topLogo {
+    display: none;
   }
 }
 
@@ -172,27 +197,40 @@ h2 span {
   align-items: center;
 }
 
+.userImg {
+  display: inline-block;
+  width: 30px;
+  border-radius: 50%;
+}
+
 .editRoute {
   display: flex;
   justify-content: center;
-}
-
-.editRouteBtn {
-  display: inline-block;
-  color: black;
-  margin:10px;
-  font-size: 1.5em;
-  border: solid;
-  padding: 10px;
 }
 
 @media(min-width:1100px) {
   .detailMap {
       margin: 0 50px;
   }
+
+  .ownerTag {
+    margin: 10px 50px;
+  }
 }
 
 /* RouteDetails */
 .deleteBtn {
   margin: 20px;
+}
+
+/* Profile */
+.profileInfo {
+  display: flex;
+  justify-content: center;
+  margin: 50px;
+}
+
+.profileImg {
+  width: 300px;
+  border-radius: 50%;
 }

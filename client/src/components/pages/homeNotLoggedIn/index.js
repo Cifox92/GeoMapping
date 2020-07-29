@@ -2,14 +2,17 @@ import React from 'react'
 import { Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
+import GeoImg from './../../img/logo.png'
+
 const HomeNotLoggedIn = () => {
 
     return (
         <>
             <Row className='title'>
                 <section >
-                    <h1><span>GeoMapping_</span></h1>
-                    <p className='subtitle'>The new social network for Geologists.</p>
+                   
+                    <h1><span><img className='topLogo' src={GeoImg} alt="GeologistLogo"/>GeoMapping_</span></h1>
+                    <p className='subtitle'>The new connecting tool for Geologists.</p>
                 </section>
             </Row>
 
@@ -46,7 +49,7 @@ const HomeNotLoggedIn = () => {
                     <Link className='signUpBtn' to='/signup'>Sign Up</Link>
                 </Col>
                 <Col md={4}>
-                    <img className='neverStop' src="https://i.pinimg.com/236x/d3/1d/5d/d31d5d279439da7b5341cf88cc6bfb43.jpg" alt="GeologistLogo"/>
+                    <img className='bottomLogo' src={GeoImg} alt="GeologistLogo"/>
                 </Col>
             </Row>
         </>

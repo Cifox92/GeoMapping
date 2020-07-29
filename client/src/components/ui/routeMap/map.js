@@ -7,7 +7,7 @@ import {
   withScriptjs,
   Marker,
   Polyline
-} from "react-google-maps";
+} from "react-google-maps"
 
 class Map extends React.Component {
   state = {
@@ -26,7 +26,7 @@ class Map extends React.Component {
                 strokeWeight: 2
               }}
           />
-          {this.state.points.map(point => <Marker position={{lat: point.lat, lng: point.lng}}/>)}
+          {this.state.points.map(point => <Marker position={{lat: point.lat, lng: point.lng}} label={point.name} />)}
       </GoogleMap>
     )
   }

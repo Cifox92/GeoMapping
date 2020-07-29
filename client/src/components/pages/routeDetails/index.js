@@ -11,7 +11,6 @@ class RouteDetails extends Component {
         super(props)
         this.state = {
             userId: props.loggedInUser._id,
-            ownerId: undefined,
             routeId: props.match.params.id,
             route: undefined,
             points: [],
@@ -28,7 +27,7 @@ class RouteDetails extends Component {
     getRouteInfo = () => {
         this.routeService.getOneRoute(this.state.routeId)
             .then(response => {
-                this.setState({ route: response.data, ownerId: response.data.owner })
+                this.setState({ route: response.data })
                 response.data.points.map(point => {
                     this.routeService.getOnePoint(point._id)
                         .then(response => {
@@ -78,6 +77,9 @@ class RouteDetails extends Component {
                                 <div className='detailMap'>
                                     <MapComp defaultZoom={15} {...this.state.route} />
                                 </div>
+                                <div className='ownerTag'>
+                                    <small ><i>Owner of this Route: </i> <Link to={`/profile/${this.state.route.owner._id}`}><img className='userImg' src={this.state.route.owner.avatar}></img></Link></small>
+                                </div>
                                 
                             </Col>
                             <Col md={6}>
@@ -119,9 +121,8 @@ class RouteDetails extends Component {
                         </Container>
                        
                         <div className='editRoute'>
-                            {this.state.userId === this.state.ownerId ? <Link className='editRouteBtn' to={`/routeEdit/${this.state.routeId}`}>Edit this route!</Link> : null}
+                            {this.state.userId === this.state.route.owner._id ? <Link className='editBtn' to={`/routeEdit/${this.state.routeId}`}>Edit this route!</Link> : null}
                         </div>
-
                     </>
                 }
             </>

@@ -2,11 +2,18 @@ const express = require('express')
 const mongoose = require("mongoose")
 const router = express.Router()
 
+const User = require('./../models/User.model')
 const Route = require('./../models/Route.model')
 const Point = require('./../models/Point.model')
 const Rock = require('./../models/Rock.model')
 
 //Endpoints
+router.get('/getUser/:id', (req, res, next) => {
+    User.findById(req.params.id)
+        .then(response => res.json(response))
+        .catch(err => next(err))
+})
+
 router.get('/getAllRoutes', (req, res, next) => {
     Route.find().populate('points')
         .then(response => res.json(response))
@@ -20,7 +27,7 @@ router.get('/getMyRoutes/:userId', (req, res, next) => {
 })
 
 router.get('/getOneRoute/:id', (req, res, next) => {
-    Route.findById(req.params.id).populate('points')
+    Route.findById(req.params.id).populate('points').populate('owner')
         .then(response => res.json(response))
         .catch(err => next(err))
 })

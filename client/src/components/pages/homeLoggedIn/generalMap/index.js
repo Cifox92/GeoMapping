@@ -4,8 +4,7 @@ import Map from './map'
 const googleMapsApiKey = `${process.env.REACT_APP_MAPS_KEYS}`
 
 const GeneralMap = props => {
-  const initialPoints = props.routes.map(route => route.points[0].location)
-  const waypoints = initialPoints.map(p => ({lat: parseFloat(p.lat), lng: parseFloat(p.lng)}))
+  const initialPoints = props.routes.map(route => ({lat: parseFloat(route.points[0].location.lat), lng: parseFloat(route.points[0].location.lng), name: route.name, routeId: route._id}))
   let lat = props.centerLoc.lat, lng = props.centerLoc.lng
  
   const {
@@ -23,7 +22,7 @@ const GeneralMap = props => {
         googleMapsApiKey +
         '&libraries=geometry,drawing,places'
       }
-      markers={waypoints}
+      markers={initialPoints}
       loadingElement={loadingElement || <div style={{height: 'inherit'}}/>}
       containerElement={containerElement || <div style={{height: 'inherit'}}/>}
       mapElement={mapElement || <div style={{height: 'inherit'}}/>}

@@ -8,6 +8,7 @@ export default class RouterService {
         })
     }
 
+    getUser = userId => this.service.get(`/getUser/${userId}`)
     getAllRoutes = () => this.service.get('/getAllRoutes')
     getOneRoute = id => this.service.get(`/getOneRoute/${id}`)
     getMyRoutes = userId => this.service.get(`/getMyRoutes/${userId}`)

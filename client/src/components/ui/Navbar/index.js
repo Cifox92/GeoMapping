@@ -6,8 +6,9 @@ import AuthService from './../../../service/AuthService'
 import { Link, NavLink } from 'react-router-dom'
 import './index.css'
 
-class Navigation extends Component {
+import GeoImg from './../../img/logo.png'
 
+class Navigation extends Component {
     constructor(props) {
         super(props)
         this.AuthService = new AuthService()
@@ -27,7 +28,7 @@ class Navigation extends Component {
         return (
             <Navbar bg="dark" variant="dark" expand="lg" sticky="top" >
                 <Navbar.Brand>
-                    <Link to="/">GeoMapping_</Link>
+                    <Link to="/"><img className='navLogo' src={GeoImg} alt="GeologistLogo"/> GeoMapping_</Link>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
@@ -45,8 +46,7 @@ class Navigation extends Component {
                                         <span onClick={this.logout}>Log Out</span>
                                     </Nav.Link>
                                     <Nav.Link as="span">
-                                        <NavLink to="/profile" activeStyle={{ color: 'white' }}>Hello, {this.props.loggedInUser.username} </NavLink>
-                                        <Image className="navAvatar" src={this.props.loggedInUser.avatar} roundedCircle />
+                                        <NavLink to={`/profile/${this.props.loggedInUser._id}`} activeStyle={{ color: 'white' }}><Image className="navAvatar" src={this.props.loggedInUser.avatar} roundedCircle /></NavLink>
                                     </Nav.Link>
                                 </>
                             ) : (
