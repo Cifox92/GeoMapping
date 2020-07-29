@@ -25,7 +25,7 @@ class AddPoint extends Component  {
                 lng: position.coords.longitude
           })
         })
-      }
+    }
 
     handleInputChange = e => {
         const { name, value } = e.target
@@ -45,7 +45,7 @@ class AddPoint extends Component  {
         return (
             <>
                 <Row>
-                    <Col md={{ offset: 3, span: 6 }}>
+                    <Col md={6}>
                     <h3>New Point</h3>
 
                     <hr></hr>

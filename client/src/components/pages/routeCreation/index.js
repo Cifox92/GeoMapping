@@ -1,17 +1,19 @@
 import React, {Component} from 'react'
-import Spinner from 'react-bootstrap/Spinner'
+
 import RouteService from '../../../service/RoutesService'
 import AddPoint from './addPoint'
 import AddRock from './addRock'
-import Button from 'react-bootstrap/Button'
-import Modal from 'react-bootstrap/Modal'
+import MapComp from './../../ui/routeMap'
+
+import { Spinner, Button, Modal, Row, Col } from 'react-bootstrap'
 
 class RouteCreation extends Component {
     constructor (props) {
         super (props)
         this.state = {
             routeId: props.match.params.id,
-            points: undefined,
+            route: undefined,
+            hasPoints: false,
             pointIdClicked: undefined,
             showModal: false
         }
@@ -23,7 +25,12 @@ class RouteCreation extends Component {
     updatePointList = () => {
         this.routeService
             .getOneRoute(this.state.routeId)
-            .then(response => this.setState({ points: response.data.points }))
+            .then(response => {
+                this.setState({ route: response.data })
+                if(response.data.points.length > 0) {
+                    this.setState({ hasPoints: true })
+                }
+            })
             .catch(err => console.log(err))
     }
 
@@ -38,16 +45,25 @@ class RouteCreation extends Component {
     render () {
         return (
             <>
-                <h1>Add points to the route while you are working!</h1>
-                <p>Mapa aqui con los puntos</p>
-                <AddPoint {...this.props} updatePointList={this.updatePointList} routeId={this.state.routeId}/>
-
-                {!this.state.points ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> : <ul>{this.state.points.map(point => 
-                    <li key={point._id}>
-                        <Button onClick={() => {this.handleModal(true); this.pointIdClicked(point._id)}} variant="dark" size="sm" style={{ marginBottom: '20px' }}>{point.name}</Button>
-                    </li>
-                    )}
-                </ul>}
+                <h1 className='innerTitle'>Add points to the route while you are working!</h1>
+                <Row>
+                    <Col md={6}>
+                        <div className='detailMap'>
+                            {!this.state.hasPoints ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> : <MapComp defaultZoom={15} {...this.state.route} />}
+                        </div>
+                    </Col>
+                    <Col md={6}>
+                        <AddPoint {...this.props} updatePointList={this.updatePointList} routeId={this.state.routeId}/>
+                        <h3>Points added:</h3>
+                        <hr/>
+                        {!this.state.route ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> : 
+                            <>
+                                {this.state.route.points.map(point =>
+                                    <Button key={point._id} onClick={() => {this.handleModal(true); this.pointIdClicked(point._id)}} variant="dark" size="sm" style={{ marginBottom: '20px' }}>{point.name}</Button>
+                                )}
+                            </>}                        
+                    </Col>
+                </Row>
 
                 <Modal size="lg" show={this.state.showModal} onHide={() => this.handleModal(false)}>
                     <Modal.Body>

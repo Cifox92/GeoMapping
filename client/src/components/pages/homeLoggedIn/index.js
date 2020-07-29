@@ -37,7 +37,11 @@ class AllRoutes extends Component {
     updateRouteList = () => {
         this.routeService
             .getAllRoutes()
-            .then(response => this.setState({ routes: response.data }))
+            .then(response => {
+                let routesFiltered = []
+                response.data.filter(route => route.points.length > 0 ? routesFiltered.push(route) : null)
+                this.setState({ routes: routesFiltered })
+            })
             .catch(err => console.log(err))
     }
 

@@ -32,7 +32,7 @@ class RouteDetails extends Component {
                 response.data.points.map(point => {
                     this.routeService.getOnePoint(point._id)
                         .then(response => {
-                            this.setState({ points: this.state.points.concat(response.data) })
+                            this.setState({ points: this.state.points.concat(response.data).sort((a, b) => (a._id > b._id) ? 1 : -1) })
                             this.rockTypeCount(response.data)
                         })
                 })
@@ -118,8 +118,10 @@ class RouteDetails extends Component {
                             </Accordion>
                         </Container>
                        
-                        
-                        {this.state.userId === this.state.ownerId ? <Link className='editRouteBtn' to={`/routeEdit/${this.state.routeId}`}>Edit this route!</Link> : null}
+                        <div className='editRoute'>
+                            {this.state.userId === this.state.ownerId ? <Link className='editRouteBtn' to={`/routeEdit/${this.state.routeId}`}>Edit this route!</Link> : null}
+                        </div>
+
                     </>
                 }
             </>

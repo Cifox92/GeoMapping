@@ -24,7 +24,11 @@ class MyRoutes extends Component {
     updateRouteList = () => {
         this.routeService
             .getMyRoutes(this.state.userId)
-            .then(response => this.setState({ routes: response.data }))
+            .then(response => {
+                let routesFiltered = []
+                response.data.filter(route => route.points.length > 0 ? routesFiltered.push(route) : null)
+                this.setState({ routes: routesFiltered })
+            })
             .catch(err => console.log(err))
     }
 

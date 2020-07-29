@@ -172,6 +172,11 @@ h2 span {
   align-items: center;
 }
 
+.editRoute {
+  display: flex;
+  justify-content: center;
+}
+
 .editRouteBtn {
   display: inline-block;
   color: black;
@@ -185,4 +190,9 @@ h2 span {
   .detailMap {
       margin: 0 50px;
   }
+}
+
+/* RouteDetails */
+.deleteBtn {
+  margin: 20px;
 }
