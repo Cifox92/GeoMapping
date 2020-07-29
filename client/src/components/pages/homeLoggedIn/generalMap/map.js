@@ -13,7 +13,7 @@ class Map extends React.Component {
   }
   render() {
     return (
-      <GoogleMap defaultCenter={this.props.defaultCenter} defaultZoom={this.props.defaultZoom}>
+      <GoogleMap  mapTypeId= "satellite" defaultCenter={this.props.defaultCenter} defaultZoom={this.props.defaultZoom} options={function (maps) { return { mapTypeId: "satellite" } }}>
         {this.state.points.map(point => <Marker position={{lat: point.lat, lng: point.lng}}/>)}
       </GoogleMap>
     )  
