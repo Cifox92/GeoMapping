@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import './App.css'
+import './App.scss'
 
 import AuthService from './../service/AuthService'
 import { Switch, Route } from 'react-router-dom'

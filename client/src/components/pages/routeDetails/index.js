@@ -19,7 +19,6 @@ class RouteDetails extends Component {
             isFinished: false
         }
         this.routeService = new RouterService()
-
     }
 
     componentDidMount = () => {
@@ -103,9 +102,13 @@ class RouteDetails extends Component {
                                         <Card.Body>
                                             {point.rocks.map((rock, idx) =>
                                                 <div key={idx}>
-                                                    <p>Rocks in this point:</p>
-                                                    <p>Name: {rock.name}</p>
-                                                    <p>Description: {rock.description}</p>
+                                                    <h3>Rocks in this point:</h3>
+                                                    <hr/>
+                                                    <p><b>Name: </b>{rock.name}</p>
+                                                    <p><b>Description: </b>{rock.description}</p>
+                                                    <p><b>Directions: </b>{rock.directions.dataType}({rock.directions.data})</p>
+                                                    <p><b>Photos:</b></p>
+                                                    {rock.photos.map((photo, idx) => <img className='rockImg' src={photo} alt='RockImg' />)}
                                                 </div>
                                             )}
                                         </Card.Body>
@@ -116,7 +119,7 @@ class RouteDetails extends Component {
                         </Container>
                        
                         
-                        {this.state.userId === this.state.ownerId ? <Link to={`/routeEdit/${this.state.routeId}`}>Edit this route!</Link> : null}
+                        {this.state.userId === this.state.ownerId ? <Link className='editRouteBtn' to={`/routeEdit/${this.state.routeId}`}>Edit this route!</Link> : null}
                     </>
                 }
             </>
