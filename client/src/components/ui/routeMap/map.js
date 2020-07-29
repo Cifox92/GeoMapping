@@ -16,7 +16,7 @@ class Map extends React.Component {
 
   render() {
     return (
-      <GoogleMap defaultCenter={this.props.defaultCenter} defaultZoom={this.props.defaultZoom}>
+      <GoogleMap mapTypeId= "satellite" defaultCenter={this.props.defaultCenter} defaultZoom={this.props.defaultZoom}>
         <Polyline
           path={this.state.points}
           geodesic={true}
