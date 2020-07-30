@@ -62,9 +62,9 @@ class AllRoutes extends Component {
                             <h2 className='innerTitle'>Routes of all the users</h2>
 
                             <Row className='allRoutes'>
-                                {!this.state.routes ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> : this.state.routes.map(route =>
+                                {!this.state.routes ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> : this.state.routes.map((route, idx) =>
 
-                                    <Col className='route' md={4}>
+                                    <Col key={idx} className='route' md={4}>
                                         <Card bg='dark' text='white' className='routeCard'>
                                             <MapComp defaultZoom={15} {...route} />
                                             <Card.Body>
@@ -74,7 +74,6 @@ class AllRoutes extends Component {
                                             </Card.Body>
                                         </Card>
                                     </Col>
-
                                 )}
                             </Row>
 

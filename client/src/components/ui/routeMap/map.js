@@ -1,4 +1,3 @@
-/* global google*/
 import React from "react";
 
 import {
@@ -26,7 +25,7 @@ class Map extends React.Component {
             strokeWeight: 2
           }}
         />
-        {this.state.points.map(point => <Marker position={{ lat: point.lat, lng: point.lng }} label={point.name} />)}
+        {this.state.points.map((point, idx) => <Marker key={idx} position={{ lat: point.lat, lng: point.lng }} label={point.name} />)}
       </GoogleMap>
     )
   }

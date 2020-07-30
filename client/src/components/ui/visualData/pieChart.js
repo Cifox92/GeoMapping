@@ -2,27 +2,40 @@ import React from 'react'
 import { ResponsivePie } from '@nivo/pie'
 
 const MyResponsivePie = props => {
+    let data = []
 
-    let data = [
-        {
-            "id": "sedimentary",
-            "label": "Sedimentary",
-            "value": props.countRocks.Sedimentary,
-            "color": "hsl(107, 70%, 50%)"
-        },
-        {
-            "id": "igneous",
-            "label": "Igneous",
-            "value": props.countRocks.Igneous,
-            "color": "hsl(68, 70%, 50%)"
-        },
-        {
-            "id": "metamorphic",
-            "label": "Metamorphic",
-            "value": props.countRocks.Metamorphic,
-            "color": "hsl(312, 70%, 50%)"
-        },
-    ]
+    if(props.countRocks.hasOwnProperty('Sedimentary')) {
+        data.push(
+            {
+                "id": "sedimentary",
+                "label": "Sedimentary",
+                "value": props.countRocks.Sedimentary,
+                "color": "hsl(107, 70%, 50%)"
+            }
+        )
+    }
+
+    if(props.countRocks.hasOwnProperty('Igneous')) {
+        data.push(
+            {
+                "id": "sedimentary",
+                "label": "Sedimentary",
+                "value": props.countRocks.Igneous,
+                "color": "hsl(107, 70%, 50%)"
+            }
+        )
+    }
+
+    if(props.countRocks.hasOwnProperty('Metamorphic')) {
+        data.push(
+            {
+                "id": "sedimentary",
+                "label": "Sedimentary",
+                "value": props.countRocks.Metamorphic,
+                "color": "hsl(107, 70%, 50%)"
+            }
+        )
+    }
 
     return (
         <ResponsivePie
@@ -76,3 +89,24 @@ const MyResponsivePie = props => {
 
 
 export default MyResponsivePie
+
+// let data = [
+//     {
+//         "id": "sedimentary",
+//         "label": "Sedimentary",
+//         "value": props.countRocks.Sedimentary,
+//         "color": "hsl(107, 70%, 50%)"
+//     },
+//     {
+//         "id": "igneous",
+//         "label": "Igneous",
+//         "value": props.countRocks.Igneous,
+//         "color": "hsl(68, 70%, 50%)"
+//     },
+//     {
+//         "id": "metamorphic",
+//         "label": "Metamorphic",
+//         "value": props.countRocks.Metamorphic,
+//         "color": "hsl(312, 70%, 50%)"
+//     },
+// ]

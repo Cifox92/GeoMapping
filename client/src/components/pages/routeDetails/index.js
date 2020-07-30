@@ -98,7 +98,7 @@ class RouteDetails extends Component {
                         <Container>
                             <Accordion>
                                 {this.state.points.map((point, idx) =>
-                                    <Card>
+                                    <Card key={idx}>
                                         <Accordion.Toggle as={Card.Header} eventKey={`${idx}`}>
                                             <h4>Point: {point.name}</h4>
                                             <small>Lat: {point.location.lat} | Lng: {point.location.lng}</small>
@@ -114,7 +114,7 @@ class RouteDetails extends Component {
                                                         <p><b>Description: </b>{rock.description}</p>
                                                         <p><b>Directions: </b>{rock.directions.dataType}({rock.directions.data})</p>
                                                         <p><b>Photos:</b></p>
-                                                        {rock.photos.map((photo, idx) => <img className='rockImg' src={photo} alt='RockImg' />)}
+                                                        {rock.photos.map((photo, idx) => <img key={idx} className='rockImg' src={photo} alt='RockImg' />)}
                                                     </div>
                                                 )}
                                             </Card.Body>

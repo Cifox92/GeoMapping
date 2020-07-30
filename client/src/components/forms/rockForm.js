@@ -34,7 +34,7 @@ const RockForm = props => {
                 <Form.Label>Photos</Form.Label>
                 <Form.Control onChange={props.fileUpload} name="photos" type="file" />
                 <p>Added photos: </p>
-                {props.photos.map(photo => <img className='rockImg' src={photo} />)}
+                {props.photos.map(photo => <img className='rockImg' src={photo} alt='rockImg' />)}
             </Form.Group>
 
             <Form.Group>

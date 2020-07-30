@@ -1,5 +1,5 @@
-/* global google*/
 import React from "react"
+
 import {
   withGoogleMap,
   GoogleMap,
@@ -24,7 +24,7 @@ class Map extends React.Component {
     return (
       <>
         <GoogleMap mapTypeId="satellite" defaultCenter={this.props.defaultCenter} defaultZoom={this.props.defaultZoom} options={function (maps) { return { mapTypeId: "satellite" } }}>
-          {this.state.points.map(point => <Marker position={{ lat: point.lat, lng: point.lng }} onClick={() => this.setSelectedRoute(point)} />)}
+          {this.state.points.map((point, idx) => <Marker key={idx} position={{ lat: point.lat, lng: point.lng }} onClick={() => this.setSelectedRoute(point)} />)}
         </GoogleMap>
 
         {this.state.selectedRoute && (<InfoWindow onCloseClick={() => this.setSelectedRoute(null)} position={{ lat: this.state.selectedRoute.lat, lng: this.state.selectedRoute.lng }}>
