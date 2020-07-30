@@ -6,11 +6,8 @@ const User = require("../models/User.model")
 const bcrypt = require("bcrypt")
 
 router.post('/signup', (req, res, next) => {
-
-    const username = req.body.username
-    const password = req.body.password
-    const avatar = req.body.avatar
-    const aboutMe = req.body.aboutMe
+const {username, password, avatar, aboutMe} = req.body
+    
 
     if (!username || !password) {
         res.status(400).json({ message: 'Provide username and password' });

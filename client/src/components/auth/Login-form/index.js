@@ -34,7 +34,7 @@ class LoginForm extends Component {
 
     render() {
         return (
-            <Container as="main">
+            <Container as='main'>
                 <Row>
                     <Col md={{ offset: 3, span: 6 }}>
                         <h3>Log In</h3>
@@ -44,15 +44,15 @@ class LoginForm extends Component {
                         <Form onSubmit={this.handleFormSubmit}>
                             <Form.Group>
                                 <Form.Label>User Name</Form.Label>
-                                <Form.Control onChange={this.handleInputChange} value={this.state.username} name="username" type="text" />
+                                <Form.Control onChange={this.handleInputChange} value={this.state.username} name='username'type='text' />
                             </Form.Group>
 
                             <Form.Group>
                                 <Form.Label>Password</Form.Label>
-                                <Form.Control onChange={this.handleInputChange} value={this.state.password} name="password" type="password" />
+                                <Form.Control onChange={this.handleInputChange} value={this.state.password} name='password' type='password' />
                             </Form.Group>
 
-                            <Button variant="dark" type="submit">Log In</Button>
+                            <Button variant='dark' type='submit'>Log In</Button>
                         </Form>
                     </Col>
                 </Row>

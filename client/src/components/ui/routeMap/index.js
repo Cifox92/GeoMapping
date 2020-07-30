@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const googleMapsApiKey = `${process.env.REACT_APP_MAPS_KEYS}`
 
 const MapComp = props => {
-  const places = props.points.map(p => ({lat: parseFloat(p.location.lat), lng: parseFloat(p.location.lng), name: p.name}))
+  const places = props.points.map(p => ({ lat: parseFloat(p.location.lat), lng: parseFloat(p.location.lng), name: p.name }))
   let centerRoute = Math.ceil(places.length / 2) - 1
   let lat = places[centerRoute].lat, lng = places[centerRoute].lng
 
@@ -26,15 +26,15 @@ const MapComp = props => {
           '&libraries=geometry,drawing,places'
         }
         markers={places}
-        loadingElement={loadingElement || <div style={{height: `100%`}}/>}
-        containerElement={containerElement || <div style={{height: "600px"}}/>}
-        mapElement={mapElement || <div style={{height: `100%`}}/>}
-        defaultCenter={defaultCenter || {lat: lat, lng: lng}}
+        loadingElement={loadingElement || <div style={{ height: `100%` }} />}
+        containerElement={containerElement || <div style={{ height: "600px" }} />}
+        mapElement={mapElement || <div style={{ height: `100%` }} />}
+        defaultCenter={defaultCenter || { lat: lat, lng: lng }}
         defaultZoom={defaultZoom || 20}
       />
       <Link to={`/routeDetails/${props._id}`}>
-        
-    
+
+
       </Link>
     </>
   )

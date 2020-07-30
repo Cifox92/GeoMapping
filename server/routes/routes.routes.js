@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require("mongoose")
 const router = express.Router()
+const bcrypt = require("bcrypt")
 
 const User = require('./../models/User.model')
 const Route = require('./../models/Route.model')
@@ -14,6 +15,17 @@ router.get('/getUser/:id', (req, res, next) => {
         .catch(err => next(err))
 })
 
+router.put('/editProfile', (req, res, next) => {
+    const { userId, username, password, avatar, aboutMe } = req.body
+
+    const salt = bcrypt.genSaltSync(10);
+    const hashPass = bcrypt.hashSync(password, salt);
+
+    User.findByIdAndUpdate(userId, { username, password: hashPass, avatar, aboutMe })
+        .then(response => res.json(response))
+        .catch(err => next(err))
+})
+
 router.get('/getAllRoutes', (req, res, next) => {
     Route.find().populate('points')
         .then(response => res.json(response))
@@ -21,7 +33,7 @@ router.get('/getAllRoutes', (req, res, next) => {
 })
 
 router.get('/getMyRoutes/:userId', (req, res, next) => {
-    Route.find({owner: req.params.userId}).populate('points')
+    Route.find({ owner: req.params.userId }).populate('points')
         .then(response => res.json(response))
         .catch(err => next(err))
 })
@@ -33,14 +45,14 @@ router.get('/getOneRoute/:id', (req, res, next) => {
 })
 
 router.get('/getOnePoint/:id', (req, res, next) => {
-    Point.findById(req.params.id).populate('rocks') 
+    Point.findById(req.params.id).populate('rocks')
         .then(response => res.json(response))
         .catch(err => next(err))
 })
 
 router.post('/createNewRoute', (req, res, next) => {
     const { name, description, owner, points } = req.body
-    
+
     Route.create({ name, description, owner, points })
         .then(response => res.json(response))
         .catch(err => next(new Error(err)))
@@ -49,7 +61,7 @@ router.post('/createNewRoute', (req, res, next) => {
 router.put('/editRoute', (req, res, next) => {
     const { id, name, description } = req.body
 
-    Route.findByIdAndUpdate(id, { name: name, description: description })
+    Route.findByIdAndUpdate(id, { name, description })
         .then(response => res.json(response))
         .catch(err => next(err))
 })
@@ -62,9 +74,9 @@ router.put('/editPoint', (req, res, next) => {
         lng: lng
     }
 
-    Point.findByIdAndUpdate(pointId, {name: name, location: location})
-    .then(response => res.json(response))
-    .catch(err => next(err))
+    Point.findByIdAndUpdate(pointId, { name, location })
+        .then(response => res.json(response))
+        .catch(err => next(err))
 })
 
 router.put('/editRock', (req, res, next) => {
@@ -75,9 +87,9 @@ router.put('/editRock', (req, res, next) => {
         data: data
     }
 
-    Rock.findByIdAndUpdate(rockId, {name, rockType, description, samplesId, photos, directions })
-    .then(response => res.json(response))
-    .catch(err => next(err))
+    Rock.findByIdAndUpdate(rockId, { name, rockType, description, samplesId, photos, directions })
+        .then(response => res.json(response))
+        .catch(err => next(err))
 })
 
 router.post('/addPoint', (req, res, next) => {
@@ -87,9 +99,9 @@ router.post('/addPoint', (req, res, next) => {
         lat: lat,
         lng: lng
     }
-    
+
     Point.create({ name, location, rocks })
-        .then(response => Route.findByIdAndUpdate(routeId, { $push: { points: response.id }}, {new: true}))
+        .then(response => Route.findByIdAndUpdate(routeId, { $push: { points: response.id } }, { new: true }))
         .then(response => res.json(response))
         .catch(err => next(err))
 })
@@ -102,8 +114,8 @@ router.post('/addRock', (req, res, next) => {
         data: data
     }
 
-    Rock.create({pointId, name, rockType, description, samplesId, photos, directions })
-        .then(response => Point.findByIdAndUpdate(pointId, { $push: { rocks: response.id }}, {new: true}))
+    Rock.create({ pointId, name, rockType, description, samplesId, photos, directions })
+        .then(response => Point.findByIdAndUpdate(pointId, { $push: { rocks: response.id } }, { new: true }))
         .then(response => res.json(response))
         .catch(err => next(err))
 })
@@ -111,7 +123,7 @@ router.post('/addRock', (req, res, next) => {
 router.post('/deleteRock', (req, res, next) => {
     const { point, rock } = req.body
 
-    let pointUpdate = Point.findByIdAndUpdate(point, {$pull: { rocks: mongoose.Types.ObjectId(rock) }}, {new: true})
+    let pointUpdate = Point.findByIdAndUpdate(point, { $pull: { rocks: mongoose.Types.ObjectId(rock) } }, { new: true })
     let rockDelete = Rock.findByIdAndDelete(rock)
 
     Promise.all([pointUpdate, rockDelete])
@@ -122,9 +134,9 @@ router.post('/deleteRock', (req, res, next) => {
 router.post('/deletePoint', (req, res, next) => {
     const { route, point, rocks } = req.body
 
-    let routeUpdate = Route.findByIdAndUpdate(route, {$pull: { points: mongoose.Types.ObjectId(point) }}, {new: true})
+    let routeUpdate = Route.findByIdAndUpdate(route, { $pull: { points: mongoose.Types.ObjectId(point) } }, { new: true })
     let pointDeleted = Point.findByIdAndDelete(point)
-    let rocksDeleted = Rock.deleteMany({_id: rocks})
+    let rocksDeleted = Rock.deleteMany({ _id: rocks })
 
     Promise.all([routeUpdate, rocksDeleted, pointDeleted])
         .then(response => res.json(response))
@@ -134,9 +146,9 @@ router.post('/deletePoint', (req, res, next) => {
 router.post('/deleteRoute', (req, res, next) => {
     const { route, points, rocks } = req.body
     let routeDelete = Route.findByIdAndDelete(route)
-    let pointsDelete = Point.deleteMany({_id: points})
-    let rocksDelete = Rock.deleteMany({_id: rocks})
-   
+    let pointsDelete = Point.deleteMany({ _id: points })
+    let rocksDelete = Rock.deleteMany({ _id: rocks })
+
     Promise.all([rocksDelete, pointsDelete, routeDelete])
         .then(response => res.json(response))
         .catch(err => next(err))

@@ -1,12 +1,11 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import PointForm from '../../forms/pointForm'
-
 import Spinner from 'react-bootstrap/Spinner'
 import RouterService from '../../../service/RoutesService'
 
 class EditPoint extends Component {
-    constructor (props) {
-        super (props)
+    constructor(props) {
+        super(props)
         this.state = {
             pointId: props.point._id,
             name: props.point.name,
@@ -29,11 +28,11 @@ class EditPoint extends Component {
             .catch(err => console.log(err))
     }
 
-    render () {
+    render() {
         return (
             <>
                 {!this.state.name ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> :
-                <PointForm {...this.state} inputChange={this.handleInputChange} onSubmit={this.handleFormSubmit} />}
+                    <PointForm {...this.state} inputChange={this.handleInputChange} onSubmit={this.handleFormSubmit} />}
             </>
         )
     }

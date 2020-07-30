@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 import RouterService from '../../../service/RoutesService'
-import { Container, Row, Col, Spinner, Accordion, Card } from 'react-bootstrap'
-
+import Spinner from "react-bootstrap/Spinner"
+import Container from "react-bootstrap/Container"
+import Row from "react-bootstrap/Row"
+import Col from "react-bootstrap/Col"
+import Accordion from "react-bootstrap/Accordion"
+import Card from "react-bootstrap/Card"
 import MapComp from './../../ui/routeMap'
 import { Link } from 'react-router-dom'
 import PieChart from './../../ui/visualData/pieChart'
@@ -36,28 +40,28 @@ class RouteDetails extends Component {
                         })
                 })
             })
-            .then(() => setTimeout(() => this.setState({isFinished: true}), 500))
+            .then(() => setTimeout(() => this.setState({ isFinished: true }), 500))
             .catch(err => console.log(err))
     }
 
     rockTypeCount = point => {
         point.rocks.map(rock => {
-            if(rock.rockType === 'Sedimentary') {
-              if(!this.state.countRocks.hasOwnProperty('Sedimentary')) {
-                  this.state.countRocks.Sedimentary = 1
-              } else {
-                this.state.countRocks.Sedimentary += 1
-              }
+            if (rock.rockType === 'Sedimentary') {
+                if (!this.state.countRocks.hasOwnProperty('Sedimentary')) {
+                    this.state.countRocks.Sedimentary = 1
+                } else {
+                    this.state.countRocks.Sedimentary += 1
+                }
             }
-            if(rock.rockType === 'Igneous') {
-                if(!this.state.countRocks.hasOwnProperty('Igneous')) {
+            if (rock.rockType === 'Igneous') {
+                if (!this.state.countRocks.hasOwnProperty('Igneous')) {
                     this.state.countRocks.Igneous = 1
                 } else {
                     this.state.countRocks.Igneous += 1
                 }
             }
-            if(rock.rockType === 'Metamorphic') {
-                if(!this.state.countRocks.hasOwnProperty('Metamorphic')) {
+            if (rock.rockType === 'Metamorphic') {
+                if (!this.state.countRocks.hasOwnProperty('Metamorphic')) {
                     this.state.countRocks.Metamorphic = 1
                 } else {
                     this.state.countRocks.Metamorphic += 1
@@ -80,7 +84,7 @@ class RouteDetails extends Component {
                                 <div className='ownerTag'>
                                     <small ><i>Owner of this Route: </i> <Link to={`/profile/${this.state.route.owner._id}`}><img className='userImg' src={this.state.route.owner.avatar}></img></Link></small>
                                 </div>
-                                
+
                             </Col>
                             <Col md={6}>
                                 <div className='container' style={{ height: '500px' }} >
@@ -88,38 +92,38 @@ class RouteDetails extends Component {
                                 </div>
                             </Col>
                         </Row>
-                        
+
 
                         <h2 className='innerTitle'>Points of the route</h2>
                         <Container>
                             <Accordion>
-                            {this.state.points.map((point, idx) =>
-                                <Card>
-                                    <Accordion.Toggle as={Card.Header} eventKey={`${idx}`}>
-                                        <h4>Point: {point.name}</h4>
-                                        <small>Lat: {point.location.lat} | Lng: {point.location.lng}</small>
-                                    </Accordion.Toggle>
+                                {this.state.points.map((point, idx) =>
+                                    <Card>
+                                        <Accordion.Toggle as={Card.Header} eventKey={`${idx}`}>
+                                            <h4>Point: {point.name}</h4>
+                                            <small>Lat: {point.location.lat} | Lng: {point.location.lng}</small>
+                                        </Accordion.Toggle>
 
-                                    <Accordion.Collapse eventKey={`${idx}`}>
-                                        <Card.Body>
-                                            {point.rocks.map((rock, idx) =>
-                                                <div key={idx}>
-                                                    <h3>Rocks in this point:</h3>
-                                                    <hr/>
-                                                    <p><b>Name: </b>{rock.name}</p>
-                                                    <p><b>Description: </b>{rock.description}</p>
-                                                    <p><b>Directions: </b>{rock.directions.dataType}({rock.directions.data})</p>
-                                                    <p><b>Photos:</b></p>
-                                                    {rock.photos.map((photo, idx) => <img className='rockImg' src={photo} alt='RockImg' />)}
-                                                </div>
-                                            )}
-                                        </Card.Body>
-                                    </Accordion.Collapse>
-                                </Card>
-                            )}
+                                        <Accordion.Collapse eventKey={`${idx}`}>
+                                            <Card.Body>
+                                                {point.rocks.map((rock, idx) =>
+                                                    <div key={idx}>
+                                                        <h3>Rocks in this point:</h3>
+                                                        <hr />
+                                                        <p><b>Name: </b>{rock.name}</p>
+                                                        <p><b>Description: </b>{rock.description}</p>
+                                                        <p><b>Directions: </b>{rock.directions.dataType}({rock.directions.data})</p>
+                                                        <p><b>Photos:</b></p>
+                                                        {rock.photos.map((photo, idx) => <img className='rockImg' src={photo} alt='RockImg' />)}
+                                                    </div>
+                                                )}
+                                            </Card.Body>
+                                        </Accordion.Collapse>
+                                    </Card>
+                                )}
                             </Accordion>
                         </Container>
-                       
+
                         <div className='editRoute'>
                             {this.state.userId === this.state.route.owner._id ? <Link className='editBtn' to={`/routeEdit/${this.state.routeId}`}>Edit this route!</Link> : null}
                         </div>

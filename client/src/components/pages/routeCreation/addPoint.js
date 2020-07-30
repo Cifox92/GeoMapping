@@ -1,29 +1,29 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import RouteService from '../../../service/RoutesService'
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import PointForm from '../../forms/pointForm'
 
-class AddPoint extends Component  {
-    constructor (props) {
-        super (props)
+class AddPoint extends Component {
+    constructor(props) {
+        super(props)
         this.state = {
             routeId: props.match.params.id,
             name: undefined,
             lat: undefined,
             lng: undefined,
-            rocks:[]
+            rocks: []
         }
         this.routeService = new RouteService()
     }
     componentDidMount = () => this.geolocation()
-    
+
     geolocation() {
         navigator.geolocation.getCurrentPosition(position => {
-          this.setState({
+            this.setState({
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
-          })
+            })
         })
     }
 
@@ -39,17 +39,17 @@ class AddPoint extends Component  {
             .addPoint(this.state)
             .then(() => this.props.updatePointList())
             .catch((err) => console.log(err.response.data.message))
-        }
+    }
 
-    render () {
+    render() {
         return (
             <>
                 <Row>
                     <Col md={6}>
-                    <h3>New Point</h3>
+                        <h3>New Point</h3>
 
-                    <hr></hr>
-                    <PointForm {...this.state} onSubmit={this.handleFormSubmit} inputChange={this.handleInputChange} />
+                        <hr></hr>
+                        <PointForm {...this.state} onSubmit={this.handleFormSubmit} inputChange={this.handleInputChange} />
                     </Col>
                 </Row>
             </>

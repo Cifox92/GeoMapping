@@ -1,15 +1,17 @@
-import React, {Component} from 'react'
-
+import React, { Component } from 'react'
 import RouteService from '../../../service/RoutesService'
 import AddPoint from './addPoint'
 import AddRock from './addRock'
 import MapComp from './../../ui/routeMap'
-
-import { Spinner, Button, Modal, Row, Col } from 'react-bootstrap'
+import Col from "react-bootstrap/Col"
+import Spinner from "react-bootstrap/Spinner"
+import Button from "react-bootstrap/Button"
+import Modal from "react-bootstrap/Modal"
+import Row from "react-bootstrap/Row"
 
 class RouteCreation extends Component {
-    constructor (props) {
-        super (props)
+    constructor(props) {
+        super(props)
         this.state = {
             routeId: props.match.params.id,
             route: undefined,
@@ -20,14 +22,14 @@ class RouteCreation extends Component {
         this.routeService = new RouteService()
     }
 
-    componentDidMount= () => this.updatePointList()
+    componentDidMount = () => this.updatePointList()
 
     updatePointList = () => {
         this.routeService
             .getOneRoute(this.state.routeId)
             .then(response => {
                 this.setState({ route: response.data })
-                if(response.data.points.length > 0) {
+                if (response.data.points.length > 0) {
                     this.setState({ hasPoints: true })
                 }
             })
@@ -42,7 +44,7 @@ class RouteCreation extends Component {
         this.updatePointList()
     }
 
-    render () {
+    render() {
         return (
             <>
                 <h1 className='innerTitle'>Add points to the route while you are working!</h1>
@@ -53,15 +55,15 @@ class RouteCreation extends Component {
                         </div>
                     </Col>
                     <Col md={6}>
-                        <AddPoint {...this.props} updatePointList={this.updatePointList} routeId={this.state.routeId}/>
+                        <AddPoint {...this.props} updatePointList={this.updatePointList} routeId={this.state.routeId} />
                         <h3>Points added:</h3>
-                        <hr/>
-                        {!this.state.route ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> : 
+                        <hr />
+                        {!this.state.route ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> :
                             <>
                                 {this.state.route.points.map(point =>
-                                    <Button key={point._id} onClick={() => {this.handleModal(true); this.pointIdClicked(point._id)}} variant="dark" size="sm" style={{ marginBottom: '20px' }}>{point.name}</Button>
+                                    <Button key={point._id} onClick={() => { this.handleModal(true); this.pointIdClicked(point._id) }} variant="dark" size="sm" style={{ marginBottom: '20px' }}>{point.name}</Button>
                                 )}
-                            </>}                        
+                            </>}
                     </Col>
                 </Row>
 

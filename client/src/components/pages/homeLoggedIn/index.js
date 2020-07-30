@@ -5,8 +5,9 @@ import Spinner from 'react-bootstrap/Spinner'
 import MapComp from './../../ui/routeMap'
 import GeneralMap from './generalMap'
 import Card from 'react-bootstrap/Card'
-
-import { Row, Col, Container } from 'react-bootstrap'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Container from 'react-bootstrap/Container'
 
 class AllRoutes extends Component {
     constructor(props) {
@@ -50,18 +51,18 @@ class AllRoutes extends Component {
             <>
                 {!this.state.location ?
                     <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> :
-                        <>  
-                            <h2 className='innerTitle'>Routes around you</h2>
+                    <>
+                        <h2 className='innerTitle'>Routes around you</h2>
 
-                            <div className='generalMap'>
-                                {!this.state.routes ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> : <GeneralMap defaultZoom={10} routes={this.state.routes} centerLoc={this.state.location} />}
-                            </div>
+                        <div className='generalMap'>
+                            {!this.state.routes ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> : <GeneralMap defaultZoom={10} routes={this.state.routes} centerLoc={this.state.location} />}
+                        </div>
 
-                            <Container>
+                        <Container>
                             <h2 className='innerTitle'>Routes of all the users</h2>
 
-                                <Row className='allRoutes'>
-                                    {!this.state.routes ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> : this.state.routes.map(route => 
+                            <Row className='allRoutes'>
+                                {!this.state.routes ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> : this.state.routes.map(route =>
 
                                     <Col className='route' md={4}>
                                         <Card bg='dark' text='white' className='routeCard'>
@@ -71,14 +72,14 @@ class AllRoutes extends Component {
                                                 <small>{route.description}</small>
                                                 <Link to={`/routeDetails/${route._id}`} className="btn btn-primary btn-block btn-sm">See Details</Link>
                                             </Card.Body>
-                                        </Card> 
+                                        </Card>
                                     </Col>
 
-                                    )}
-                                </Row>
+                                )}
+                            </Row>
 
-                            </Container>
-                        </>
+                        </Container>
+                    </>
                 }
             </>
         )

@@ -1,11 +1,10 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import RouteForm from '../../forms/routeForm'
-
 import RouterService from '../../../service/RoutesService'
 
 class EditRouteInfo extends Component {
-    constructor (props) {
-        super (props)
+    constructor(props) {
+        super(props)
         this.state = {
             id: props._id,
             name: props.name,
@@ -24,9 +23,9 @@ class EditRouteInfo extends Component {
         this.routeService
             .editRoute(this.state)
             .catch((err) => console.log(err.response.data.message))
-        }
+    }
 
-    render () {
+    render() {
         return (
             <>
                 <RouteForm {...this.state} onSubmit={this.handleFormSubmit} inputChange={this.handleInputChange} />

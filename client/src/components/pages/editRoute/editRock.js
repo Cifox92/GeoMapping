@@ -1,12 +1,11 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import RouterService from '../../../service/RoutesService'
 import FilesService from '../../../service/FilesService'
-
 import RockForm from '../../forms/rockForm'
 
 class EditRock extends Component {
-    constructor (props) {
-        super (props)
+    constructor(props) {
+        super(props)
         this.state = {
             rockId: props.rock._id,
             name: props.rock.name,
@@ -20,7 +19,7 @@ class EditRock extends Component {
         this.routeService = new RouterService()
         this.filesService = new FilesService()
     }
-    
+
     handleInputChange = e => {
         const { name, value } = e.target
         this.setState({ [name]: value })
@@ -29,14 +28,14 @@ class EditRock extends Component {
     handleFileUpload = e => {
         const uploadData = new FormData()
         uploadData.append('photo', e.target.files[0])
-    
+
         this.filesService.handleUpload(uploadData)
-          .then(response => {
-            console.log('Subida de archivo finalizada! La URL de Cloudinary es: ', response.data.secure_url)
-            this.setState({photos: this.state.photos.concat(response.data.secure_url)})
-          })
-          .catch(err => console.log(err))
-      }
+            .then(response => {
+                console.log('Subida de archivo finalizada! La URL de Cloudinary es: ', response.data.secure_url)
+                this.setState({ photos: this.state.photos.concat(response.data.secure_url) })
+            })
+            .catch(err => console.log(err))
+    }
 
     handleFormSubmit = e => {
         e.preventDefault()
@@ -46,10 +45,10 @@ class EditRock extends Component {
             .catch(err => console.log(err))
     }
 
-    render () {
+    render() {
         return (
             <>
-            <RockForm {...this.state} onSubmit={this.handleFormSubmit} fileUpload={this.handleFileUpload} inputChange={this.handleInputChange} />
+                <RockForm {...this.state} onSubmit={this.handleFormSubmit} fileUpload={this.handleFileUpload} inputChange={this.handleInputChange} />
             </>
         )
     }

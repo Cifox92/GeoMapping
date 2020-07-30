@@ -1,16 +1,19 @@
-import React, {Component} from 'react'
-
+import React, { Component } from 'react'
 import RouterService from '../../../service/RoutesService'
 import EditRouteInfo from './editRouteInfo'
-
 import EditPoint from './editPoint'
 import EditRock from './editRock'
+import Spinner from 'react-bootstrap/Spinner'
+import Button from 'react-bootstrap/Button'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Accordion from 'react-bootstrap/Accordion'
+import Card from 'react-bootstrap/Card'
 
-import { Spinner, Button, Container, Row, Col, Accordion, Card } from 'react-bootstrap'
- 
 class Edit extends Component {
-    constructor (props) {
-        super (props)
+    constructor(props) {
+        super(props)
         this.state = {
             routeId: props.match.params.id,
             userId: props.loggedInUser._id,
@@ -26,10 +29,10 @@ class Edit extends Component {
     }
 
     getRouteInfo = () => {
-        this.setState({points: []})
+        this.setState({ points: [] })
         this.routeService.getOneRoute(this.state.routeId)
             .then(response => {
-                this.setState({route: response.data, ownerId: response.data.owner})
+                this.setState({ route: response.data, ownerId: response.data.owner })
                 response.data.points.map(point => {
                     this.routeService.getOnePoint(point._id)
                         .then(response => this.setState({ points: this.state.points.concat(response.data).sort((a, b) => (a._id > b._id) ? 1 : -1) }))
@@ -88,53 +91,53 @@ class Edit extends Component {
             .catch(err => console.log(err))
     }
 
-    render () {
+    render() {
         return (
             <Container>
                 <h2 className='innerTitle'>Edit this Route</h2>
-                {!this.state.route ? 
-                <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> :
+                {!this.state.route ?
+                    <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> :
                     <>
                         <EditRouteInfo {...this.state.route} />
                         <Button className='deleteBtn' onClick={() => this.deleteRoute()}>Delete this route</Button>
 
                         <Accordion>
-                            {!this.state.points ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> : 
-                            <> 
-                                {this.state.points.map((point, idx) => 
-                                    <Card key={point._id}>
-                                        <Accordion.Toggle as={Card.Header} eventKey={`${idx}`}>
-                                            <h4>Point: {point.name}</h4>
-                                        </Accordion.Toggle>
+                            {!this.state.points ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> :
+                                <>
+                                    {this.state.points.map((point, idx) =>
+                                        <Card key={point._id}>
+                                            <Accordion.Toggle as={Card.Header} eventKey={`${idx}`}>
+                                                <h4>Point: {point.name}</h4>
+                                            </Accordion.Toggle>
 
-                                        <Accordion.Collapse eventKey={`${idx}`}>
-                                            <Row className='justify-content-md-center'>
-                                                <Col md={10}>
-                                                    <p className='innerTitle'>Edit Point:</p>
+                                            <Accordion.Collapse eventKey={`${idx}`}>
+                                                <Row className='justify-content-md-center'>
+                                                    <Col md={10}>
+                                                        <p className='innerTitle'>Edit Point:</p>
 
-                                                    <EditPoint point={point} handleFormSubmit={this.handleFormSubmit} />
+                                                        <EditPoint point={point} handleFormSubmit={this.handleFormSubmit} />
 
-                                                    <Button className='deleteBtn' onClick={() => this.deletePoint(point)}>Delete this point</Button>
+                                                        <Button className='deleteBtn' onClick={() => this.deletePoint(point)}>Delete this point</Button>
 
-                                                    <hr/>
+                                                        <hr />
 
-                                                    <p className='innerTitle'>Rocks in this point:</p> 
-                                                    {point.rocks.map(rock => 
-                                                        <div key={rock._id}>
-                                                            <EditRock rock={rock} handleFormSubmit={this.handleFormSubmit} />
-                                                            <Button className='deleteBtn' onClick={() => this.deleteRock(rock._id, point._id)}>Delete this rock</Button>
-                                                            <hr/>
-                                                        </div>
-                                                    )}
-                                                </Col>
-                                            </Row>
-                                        </Accordion.Collapse>
-                                    </Card>
-                                )}
-                            </>
+                                                        <p className='innerTitle'>Rocks in this point:</p>
+                                                        {point.rocks.map(rock =>
+                                                            <div key={rock._id}>
+                                                                <EditRock rock={rock} handleFormSubmit={this.handleFormSubmit} />
+                                                                <Button className='deleteBtn' onClick={() => this.deleteRock(rock._id, point._id)}>Delete this rock</Button>
+                                                                <hr />
+                                                            </div>
+                                                        )}
+                                                    </Col>
+                                                </Row>
+                                            </Accordion.Collapse>
+                                        </Card>
+                                    )}
+                                </>
                             }
-                        </Accordion>                            
-                    </> 
+                        </Accordion>
+                    </>
                 }
             </Container>
         )

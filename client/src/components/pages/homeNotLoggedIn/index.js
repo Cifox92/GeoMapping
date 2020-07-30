@@ -1,7 +1,7 @@
 import React from 'react'
-import { Row, Col } from 'react-bootstrap'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import { Link } from 'react-router-dom'
-
 import GeoImg from './../../img/logo.png'
 
 const HomeNotLoggedIn = () => {
@@ -10,8 +10,8 @@ const HomeNotLoggedIn = () => {
         <>
             <Row className='title'>
                 <section >
-                   
-                    <h1><span><img className='topLogo' src={GeoImg} alt="GeologistLogo"/>GeoMapping_</span></h1>
+
+                    <h1><span><img className='topLogo' src={GeoImg} alt="GeologistLogo" />GeoMapping_</span></h1>
                     <p className='subtitle'>The new connecting tool for Geologists.</p>
                 </section>
             </Row>
@@ -27,7 +27,7 @@ const HomeNotLoggedIn = () => {
 
             <Row className='mapImg section'>
                 <Col md={6}>
-                    
+
                 </Col>
                 <Col md={6}>
                     <section className='sectionText'>
@@ -49,7 +49,7 @@ const HomeNotLoggedIn = () => {
                     <Link className='signUpBtn' to='/signup'>Sign Up</Link>
                 </Col>
                 <Col md={4}>
-                    <img className='bottomLogo' src={GeoImg} alt="GeologistLogo"/>
+                    <img className='bottomLogo' src={GeoImg} alt="GeologistLogo" />
                 </Col>
             </Row>
         </>

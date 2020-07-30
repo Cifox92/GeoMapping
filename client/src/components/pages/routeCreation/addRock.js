@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import RouteService from '../../../service/RoutesService'
 import FilesService from '../../../service/FilesService'
-
 import RockForm from '../../forms/rockForm'
 
 class AddRockForm extends Component {
@@ -36,7 +35,7 @@ class AddRockForm extends Component {
             this.setState({photos: this.state.photos.concat(response.data.secure_url)})
           })
           .catch(err => console.log(err))
-      }
+    }
 
     handleFormSubmit = e => {
         e.preventDefault()

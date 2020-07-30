@@ -5,7 +5,6 @@ import Image from 'react-bootstrap/Image'
 import AuthService from './../../../service/AuthService'
 import { Link, NavLink } from 'react-router-dom'
 import './index.css'
-
 import GeoImg from './../../img/logo.png'
 
 class Navigation extends Component {
@@ -26,9 +25,10 @@ class Navigation extends Component {
 
     render() {
         return (
+
             <Navbar bg="dark" variant="dark" expand="lg" sticky="top" >
                 <Navbar.Brand>
-                    <Link to="/"><img className='navLogo' src={GeoImg} alt="GeologistLogo"/> GeoMapping_</Link>
+                    <Link to="/"><img className='navLogo' src={GeoImg} alt="GeologistLogo" /> GeoMapping_</Link>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
@@ -63,6 +63,7 @@ class Navigation extends Component {
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
+
         )
     }
 }

@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.scss'
-
 import AuthService from './../service/AuthService'
 import { Switch, Route } from 'react-router-dom'
 import Navigation from './ui/Navbar'
 import SignupForm from './auth/Signup-form'
 import LoginForm from './auth/Login-form'
 import ProfilePage from './pages/profile'
+import EditProfile from './pages/editUser'
 import HomeLoggedIn from './pages/homeLoggedIn'
 import HomeNotLoggedIn from './pages/homeNotLoggedIn'
 import CreateRoute from './pages/createRoute'
@@ -42,7 +42,7 @@ class App extends Component {
       <div className='contain'>
         <div className='content'>
           <Navigation setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} />
-          
+
           <Switch>
             <Route exact path='/' render={() => this.state.loggedInUser ? <HomeLoggedIn /> : <HomeNotLoggedIn />} />
             <Route path='/login' render={props => <LoginForm {...props} setTheUser={this.setTheUser} />} />

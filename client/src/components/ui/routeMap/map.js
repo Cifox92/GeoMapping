@@ -16,17 +16,17 @@ class Map extends React.Component {
 
   render() {
     return (
-      <GoogleMap mapTypeId= "satellite" defaultCenter={this.props.defaultCenter} defaultZoom={this.props.defaultZoom}>
+      <GoogleMap mapTypeId="satellite" defaultCenter={this.props.defaultCenter} defaultZoom={this.props.defaultZoom}>
         <Polyline
           path={this.state.points}
           geodesic={true}
-              options={{
-                strokeColor: "#ff2527",
-                strokeOpacity: 0.75,
-                strokeWeight: 2
-              }}
-          />
-          {this.state.points.map(point => <Marker position={{lat: point.lat, lng: point.lng}} label={point.name} />)}
+          options={{
+            strokeColor: "#ff2527",
+            strokeOpacity: 0.75,
+            strokeWeight: 2
+          }}
+        />
+        {this.state.points.map(point => <Marker position={{ lat: point.lat, lng: point.lng }} label={point.name} />)}
       </GoogleMap>
     )
   }

@@ -9,6 +9,7 @@ export default class RouterService {
     }
 
     getUser = userId => this.service.get(`/getUser/${userId}`)
+    editUser = user => this.service.put('/editProfile', user)
     getAllRoutes = () => this.service.get('/getAllRoutes')
     getOneRoute = id => this.service.get(`/getOneRoute/${id}`)
     getMyRoutes = userId => this.service.get(`/getMyRoutes/${userId}`)

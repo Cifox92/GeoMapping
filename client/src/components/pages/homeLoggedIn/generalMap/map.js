@@ -23,18 +23,18 @@ class Map extends React.Component {
   render() {
     return (
       <>
-        <GoogleMap  mapTypeId= "satellite" defaultCenter={this.props.defaultCenter} defaultZoom={this.props.defaultZoom} options={function (maps) { return { mapTypeId: "satellite" } }}>
-          {this.state.points.map(point => <Marker position={{lat: point.lat, lng: point.lng}} onClick={() => this.setSelectedRoute(point)} />)}
+        <GoogleMap mapTypeId="satellite" defaultCenter={this.props.defaultCenter} defaultZoom={this.props.defaultZoom} options={function (maps) { return { mapTypeId: "satellite" } }}>
+          {this.state.points.map(point => <Marker position={{ lat: point.lat, lng: point.lng }} onClick={() => this.setSelectedRoute(point)} />)}
         </GoogleMap>
 
-        {this.state.selectedRoute && (<InfoWindow onCloseClick={() => this.setSelectedRoute(null) } position={{ lat: this.state.selectedRoute.lat, lng: this.state.selectedRoute.lng }}>
+        {this.state.selectedRoute && (<InfoWindow onCloseClick={() => this.setSelectedRoute(null)} position={{ lat: this.state.selectedRoute.lat, lng: this.state.selectedRoute.lng }}>
           <>
             <Link to={`routeDetails/${this.state.selectedRoute.routeId}`}>Route: {this.state.selectedRoute.name}</Link>
           </>
-        </InfoWindow> 
+        </InfoWindow>
         )}
       </>
-    )  
+    )
   }
 }
 
