@@ -3,11 +3,13 @@ import RouteService from '../../../service/RoutesService'
 import AddPoint from './addPoint'
 import AddRock from './addRock'
 import MapComp from './../../ui/routeMap'
-import Col from "react-bootstrap/Col"
-import Spinner from "react-bootstrap/Spinner"
-import Button from "react-bootstrap/Button"
-import Modal from "react-bootstrap/Modal"
-import Row from "react-bootstrap/Row"
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Spinner from 'react-bootstrap/Spinner'
+import Button from 'react-bootstrap/Button'
+import Modal from 'react-bootstrap/Modal'
+
 
 class RouteCreation extends Component {
     constructor(props) {
@@ -46,7 +48,7 @@ class RouteCreation extends Component {
 
     render() {
         return (
-            <>
+            <Container fluid>
                 <h1 className='innerTitle'>Add points to the route while you are working!</h1>
                 <Row>
                     <Col md={6}>
@@ -72,7 +74,7 @@ class RouteCreation extends Component {
                         <AddRock pointIdClicked={this.state.pointIdClicked} handleRockSubmit={this.handleRockSubmit} />
                     </Modal.Body>
                 </Modal>
-            </>
+            </Container>
         )
     }
 }

@@ -7,7 +7,7 @@ const MyResponsivePie = props => {
     if(props.countRocks.hasOwnProperty('Sedimentary')) {
         data.push(
             {
-                "id": "sedimentary",
+                "id": "Sedimentary",
                 "label": "Sedimentary",
                 "value": props.countRocks.Sedimentary,
                 "color": "hsl(107, 70%, 50%)"
@@ -18,8 +18,8 @@ const MyResponsivePie = props => {
     if(props.countRocks.hasOwnProperty('Igneous')) {
         data.push(
             {
-                "id": "sedimentary",
-                "label": "Sedimentary",
+                "id": "Igneous",
+                "label": "Igneous",
                 "value": props.countRocks.Igneous,
                 "color": "hsl(107, 70%, 50%)"
             }
@@ -29,8 +29,8 @@ const MyResponsivePie = props => {
     if(props.countRocks.hasOwnProperty('Metamorphic')) {
         data.push(
             {
-                "id": "sedimentary",
-                "label": "Sedimentary",
+                "id": "Metamorphic",
+                "label": "Metamorphic",
                 "value": props.countRocks.Metamorphic,
                 "color": "hsl(107, 70%, 50%)"
             }

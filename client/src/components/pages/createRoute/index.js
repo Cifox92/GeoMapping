@@ -41,7 +41,6 @@ class CreateRoute extends Component {
                     <h3>New Route</h3>
 
                     <hr></hr>
-
                         <RouteForm {...this.state} onSubmit={this.handleFormSubmit} inputChange={this.handleInputChange} />
                     </Col>
                 </Row>

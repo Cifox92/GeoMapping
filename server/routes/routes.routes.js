@@ -16,13 +16,13 @@ router.get('/getUser/:id',ensureLogin.ensureLoggedIn(), (req, res, next) => {
         .catch(err => next(err))
 })
 
-router.put('/editProfile',ensureLogin.ensureLoggedIn(), (req, res, next) => {
+router.put('/editProfile', ensureLogin.ensureLoggedIn(), (req, res, next) => {
     const { userId, username, password, avatar, aboutMe } = req.body
 
     const salt = bcrypt.genSaltSync(10);
     const hashPass = bcrypt.hashSync(password, salt);
 
-    User.findByIdAndUpdate(userId,ensureLogin.ensureLoggedIn(), { username, password: hashPass, avatar, aboutMe })
+    User.findByIdAndUpdate(userId, { username, password: hashPass, avatar, aboutMe })
         .then(response => res.json(response))
         .catch(err => next(err))
 })

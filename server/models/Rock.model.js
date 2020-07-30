@@ -18,7 +18,8 @@ const rockSchema = new Schema({
     directions: {
         dataType: {
             type: String,
-            enum: ['Direction and Dip', 'Lineation']
+            enum: [ 'none','Direction and Dip', 'Lineation', 'Foliation'],
+            default: 'none'
         },
         data: {type: String}
     }

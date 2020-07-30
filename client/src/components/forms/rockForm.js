@@ -14,6 +14,7 @@ const RockForm = props => {
             <Form.Group controlId="exampleForm.ControlSelect1">
                 <Form.Label>Type of Rock</Form.Label>
                 <Form.Control as='select' onChange={props.inputChange} value={props.rockType} name="rockType" type="text">
+                    <option value='0'>Choose one!</option>
                     <option value='Sedimentary'>Sedimentary</option>
                     <option value='Igneous'>Igneous</option>
                     <option value='Metamorphic'>Metamorphic</option>
@@ -22,7 +23,7 @@ const RockForm = props => {
 
             <Form.Group>
                 <Form.Label>Description</Form.Label>
-                <Form.Control onChange={props.inputChange} value={props.description} name="description" type="text" />
+                <Form.Control as='textarea' onChange={props.inputChange} value={props.description} name="description" type="text" />
             </Form.Group>
             
             <Form.Group>
@@ -41,7 +42,13 @@ const RockForm = props => {
                 <Form.Label>Directions</Form.Label>
 
                 <Form.Text className="text-muted">Type of data</Form.Text>
-                <Form.Control onChange={props.inputChange} value={props.dataType} name="dataType" type="text" />
+                <Form.Control as='select' onChange={props.inputChange} value={props.dataType} name="dataType" type="text">
+                    <option value='0'>Choose one!</option>
+                    <option value='none'>none</option>
+                    <option value='Direction and Dip'>Direction and Dip</option>
+                    <option value='Lineation'>Lineation</option>
+                    <option value='Foliation'>Foliation</option>
+                </Form.Control>
 
                 <Form.Text className="text-muted">Data</Form.Text>
                 <Form.Control onChange={props.inputChange} value={props.data} name="data" type="text" />

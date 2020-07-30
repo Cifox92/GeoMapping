@@ -29,12 +29,12 @@ class LoginForm extends Component {
                 this.props.setTheUser(response.data)
                 this.props.history.push('/')
             })
-            .catch(err => console.log(err.response.data.message))
+            .catch(err => console.log(err))
     }
 
     render() {
         return (
-            <Container as='main'>
+            <Container>
                 <Row>
                     <Col md={{ offset: 3, span: 6 }}>
                         <h3>Log In</h3>

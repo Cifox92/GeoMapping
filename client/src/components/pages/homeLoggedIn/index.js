@@ -76,7 +76,6 @@ class AllRoutes extends Component {
                                     </Col>
                                 )}
                             </Row>
-
                         </Container>
                     </>
                 }

@@ -72,7 +72,7 @@ class RouteDetails extends Component {
 
     render() {
         return (
-            <>
+            <Container fluid>
                 {!this.state.route ? <Spinner animation="grow" role="status"><span className="sr-only">Loading...</span></Spinner> :
                     <>
                         <h2 className='innerTitle'>{this.state.route.name}</h2>
@@ -125,11 +125,16 @@ class RouteDetails extends Component {
                         </Container>
 
                         <div className='editRoute'>
-                            {this.state.userId === this.state.route.owner._id ? <Link className='editBtn' to={`/routeEdit/${this.state.routeId}`}>Edit this route!</Link> : null}
+                            {this.state.userId === this.state.route.owner._id ? 
+                            <>
+                                <Link className='editBtn' to={`/routeEdit/${this.state.routeId}`}>Edit this route!</Link>
+                                <Link className='editBtn' to={`/routeCreation/${this.state.routeId}`}>Add more points!</Link>
+                            </> 
+                            : null}
                         </div>
                     </>
                 }
-            </>
+            </Container>
         )
     }
 }

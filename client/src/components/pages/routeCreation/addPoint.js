@@ -19,12 +19,14 @@ class AddPoint extends Component {
     componentDidMount = () => this.geolocation()
 
     geolocation() {
-        navigator.geolocation.getCurrentPosition(position => {
-            this.setState({
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
+        this.interval = setInterval(() => {
+            navigator.geolocation.getCurrentPosition(position => {
+                this.setState({
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                })
             })
-        })
+        }, 3000)
     }
 
     handleInputChange = e => {
@@ -33,7 +35,6 @@ class AddPoint extends Component {
     }
 
     handleFormSubmit = e => {
-        this.geolocation()
         e.preventDefault()
         this.routeService
             .addPoint(this.state)
