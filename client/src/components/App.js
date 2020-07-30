@@ -47,12 +47,12 @@ class App extends Component {
             <Route exact path='/' render={() => this.state.loggedInUser ? <HomeLoggedIn /> : <HomeNotLoggedIn />} />
             <Route path='/login' render={props => <LoginForm {...props} setTheUser={this.setTheUser} />} />
             <Route path='/signup' render={props => <SignupForm {...props} setTheUser={this.setTheUser} />} />
-            <Route path='/profile/:id' render={props => <ProfilePage {...props} loggedInUser={this.state.loggedInUser} />} />
-            <Route path='/createRoute' render={props => <CreateRoute {...props} loggedInUser={this.state.loggedInUser} />} />
-            <Route path='/myRoutes' render={props => <MyRoutes {...props} loggedInUser={this.state.loggedInUser} />} />
-            <Route path='/routeCreation/:id' render={props => <RouteCreation {...props} loggedInUser={this.state.loggedInUser} />} />
-            <Route path='/routeDetails/:id' render={props => <RouteDetails {...props} loggedInUser={this.state.loggedInUser} />} />
-            <Route path='/routeEdit/:id' render={props => <Edit {...props} loggedInUser={this.state.loggedInUser} />} />
+            <Route path='/profile/:id' render={props => this.state.loggedInUser ? <ProfilePage {...props} loggedInUser={this.state.loggedInUser} /> : <HomeNotLoggedIn />} />
+            <Route path='/createRoute' render={props => this.state.loggedInUser ? <CreateRoute {...props} loggedInUser={this.state.loggedInUser} /> : <HomeNotLoggedIn />} />
+            <Route path='/myRoutes' render={props => this.state.loggedInUser ? <MyRoutes {...props} loggedInUser={this.state.loggedInUser} /> : <HomeNotLoggedIn />} />
+            <Route path='/routeCreation/:id' render={props => this.state.loggedInUser ? <RouteCreation {...props} loggedInUser={this.state.loggedInUser} /> : <HomeNotLoggedIn />} />
+            <Route path='/routeDetails/:id' render={props => this.state.loggedInUser ? <RouteDetails {...props} loggedInUser={this.state.loggedInUser} /> : <HomeNotLoggedIn />} />
+            <Route path='/routeEdit/:id' render={props => this.state.loggedInUser ? <Edit {...props} loggedInUser={this.state.loggedInUser} /> : <HomeNotLoggedIn />} />
           </Switch>
         </div>
         <footer className='footer'><small>Copyright ©2020 Ignacio Serrano & David Roel Gómez</small></footer>
