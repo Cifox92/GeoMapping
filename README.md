@@ -43,7 +43,8 @@ npm start
 
 _For server side:_
 
-```npm run dev
+```
+npm run dev
 ```
 
 ## Built with 🛠️
