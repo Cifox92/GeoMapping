@@ -49,10 +49,14 @@ _For server side:_
 ## Built with 🛠️
 * React.
 * Bootstrap React.
+* Google Maps React.
+* Cloudinary.
 * Node.
 * Express.
 * MongoDB.
 * Mongoose.
+* Bcrypt.
+* Pass
 
 ## Authors ✒️
 _Two Ironhackers:_
