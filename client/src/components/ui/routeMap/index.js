@@ -32,10 +32,7 @@ const MapComp = props => {
         defaultCenter={defaultCenter || { lat: lat, lng: lng }}
         defaultZoom={defaultZoom || 20}
       />
-      <Link to={`/routeDetails/${props._id}`}>
-
-
-      </Link>
+      <Link to={`/routeDetails/${props._id}`} />
     </>
   )
 }

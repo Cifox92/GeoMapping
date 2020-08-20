@@ -87,26 +87,4 @@ const MyResponsivePie = props => {
 
 }
 
-
 export default MyResponsivePie
-
-// let data = [
-//     {
-//         "id": "sedimentary",
-//         "label": "Sedimentary",
-//         "value": props.countRocks.Sedimentary,
-//         "color": "hsl(107, 70%, 50%)"
-//     },
-//     {
-//         "id": "igneous",
-//         "label": "Igneous",
-//         "value": props.countRocks.Igneous,
-//         "color": "hsl(68, 70%, 50%)"
-//     },
-//     {
-//         "id": "metamorphic",
-//         "label": "Metamorphic",
-//         "value": props.countRocks.Metamorphic,
-//         "color": "hsl(312, 70%, 50%)"
-//     },
-// ]
